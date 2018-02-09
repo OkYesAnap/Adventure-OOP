@@ -1,0 +1,39 @@
+.wall {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4nlHGm-bnqkEuBVhDAqSozdW2arCSC8FOru0vnPN_hzs1sIjl7Q');
+}
+.tree {
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpzy1Pf7lkQkCzJ7J1GuxbVPZzyMRaK1Xkuw_bIyKLk3ZSPCk2zQ');
+}
+.monster {
+  background-image: url('http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif');
+}
+.hero {
+  background-image: url('https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_animation_by_hero_in_pixels.gif');
+}
+.hero-target {
+  background-image: url('http://worldartsme.com/images/batman-transparent-background-clipart-1.jpg');
+}
+.button {
+  min-width: 260px;
+}
+.enigma {
+  background-image: url('http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif');
+}
+.enigma-key {
+  background-image: url('http://srorieltomsk.ru/upload/medialibrary/a54/8503418_5f8e8269.gif');
+}
+.chest {
+  background-image: url('https://i.pinimg.com/736x/b4/c0/f4/b4c0f4c875b7186507479f4368f2276b.jpg');
+}
+.key {
+  background-image: url('http://srorieltomsk.ru/upload/medialibrary/a54/8503418_5f8e8269.gif') !important;
+}
+.gold {
+  background-image: url('https://orig00.deviantart.net/9152/f/2015/187/2/b/apple_animation_logo_for_rainmeter_by_hekee-d8pte64.gif');
+}
+.diamond {
+  background-image: url('http://img71.laughinggif.com/pic/HTTPS9tZWRpYS5naXBoeS5jb20vbWVkaWEvSUtCcmdXdmdsRXVJZy9naXBoeS5naWYlog.gif');
+}
+.food {
+  background-image: url('http://moziru.com/images/drawn-dougnut-transparent-background-5.gif');
+}

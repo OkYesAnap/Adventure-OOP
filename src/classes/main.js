@@ -1,0 +1,91 @@
+import { itemRentranslaton } from '../maps/localMap'
+export class Character {
+  constructor(coords, id, name, img, interact) {
+    this.x = coords.x
+    this.y = coords.y
+    this.id = id
+    this.name = name
+    this.img = img
+    this.interact = interact
+  }
+}
+export class CharWithInventory extends Character {
+  constructor(coords, id, name, img, interact = {}, inventory) {
+    super(coords, id, name, img, interact)
+    this.maxVolume = inventory.maxVolume
+    this.inventory = this.emptyInventory(inventory)
+  }
+  emptyInventory(inv) {
+    let inventory = []
+    for (let x = 0; x < inv.invHeight; x++) {
+      inventory.push([])
+      for (let y = 0; y < inv.invWidth; y++) {
+        inventory[x].push(' ')
+      }
+    }
+    inventory = itemRentranslaton(inventory)
+    inventory = this.checkVolume(inventory)
+    inventory.maxVolume = this.maxVolume
+    return inventory
+  }
+  retrans(inv) {
+    inv = itemRentranslaton(inv)
+  }
+  checkVolume(inv) {
+    inv.volume = inv.reduce((vol, row) => {
+      row.forEach(element => {
+        vol += element.weight
+      })
+      return vol
+    }, 0)
+    return inv
+  }
+  addItem(item) {
+    let arr = [...this.inventory]
+    if (this.inventory.volume + item.weight > this.inventory.maxVolume) {
+      console.log('To havy')
+      return false
+    }
+    for (let x = 0; x < arr.length; x++) {
+      for (let y = 0; y < arr[x].length; y++) {
+        if (arr[x][y].id === ' ') {
+          item.x = x
+          item.y = y
+          arr[x][y] = item
+          this.inventory = this.checkVolume(arr)
+          this.inventory.maxVolume = this.maxVolume
+          return true
+        }
+      }
+    }
+    this.inventory = arr
+  }
+}
+export class Item {
+  constructor(coords, id, name = '', cssclass = '', interact = {}, weight = 0) {
+    this.x = coords.x
+    this.y = coords.y
+    this.id = id
+    this.name = name
+    this.cssclass = cssclass
+    this.interact = interact
+    this.weight = weight
+  }
+}
+
+export class PickableItem extends Item {
+  constructor(coords, id, name, cssclass, interact, weight = 0, info = '') {
+    super(coords, id, name, cssclass, interact, weight)
+    this.info = info
+  }
+  clearItem(coords) {
+    const item = { ...this }
+    this.id = ' '
+    this.name = ''
+    this.cssclass = ''
+    this.interact = {}
+    this.weight = 0
+    this.interact = ''
+    return item
+  }
+}
