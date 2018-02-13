@@ -1,4 +1,5 @@
-import { itemRentranslaton } from '../maps/localMap'
+import { itemRetranslaton } from '../maps/localMap'
+
 export class Character {
   constructor(coords, id, name, img, interact) {
     this.x = coords.x
@@ -9,10 +10,10 @@ export class Character {
     this.interact = interact
   }
 }
+
 export class CharWithInventory extends Character {
   constructor(coords, id, name, img, interact = {}, inventory) {
     super(coords, id, name, img, interact)
-    this.maxVolume = inventory.maxVolume
     this.inventory = this.emptyInventory(inventory)
   }
   emptyInventory(inv) {
@@ -23,13 +24,13 @@ export class CharWithInventory extends Character {
         inventory[x].push(' ')
       }
     }
-    inventory = itemRentranslaton(inventory)
+    inventory = itemRetranslaton(inventory)
     inventory = this.checkVolume(inventory)
-    inventory.maxVolume = this.maxVolume
+    inventory.maxVolume = inv.maxVolume
     return inventory
   }
   retrans(inv) {
-    inv = itemRentranslaton(inv)
+    inv = itemRetranslaton(inv)
   }
   checkVolume(inv) {
     inv.volume = inv.reduce((vol, row) => {
@@ -42,10 +43,7 @@ export class CharWithInventory extends Character {
   }
   addItem(item) {
     let arr = [...this.inventory]
-    if (this.inventory.volume + item.weight > this.inventory.maxVolume) {
-      console.log('To havy')
-      return false
-    }
+    arr.max = this.inventory.maxVolume
     for (let x = 0; x < arr.length; x++) {
       for (let y = 0; y < arr[x].length; y++) {
         if (arr[x][y].id === ' ') {
@@ -53,14 +51,23 @@ export class CharWithInventory extends Character {
           item.y = y
           arr[x][y] = item
           this.inventory = this.checkVolume(arr)
-          this.inventory.maxVolume = this.maxVolume
+          this.inventory.maxVolume = arr.max
           return true
         }
       }
     }
     this.inventory = arr
   }
+  checkOverload(item) {
+    let arr = [...this.inventory]
+    arr.max = this.inventory.maxVolume
+    if (this.inventory.volume + item.weight <= this.inventory.maxVolume) {
+      this.message = { msg: 'Do you want to pickup? ' + item.name, buttons: ['yes', 'no'], cssclass: item.cssclass, show: true }
+      return true
+    } else this.message = { msg: this.name + ' got overloaded!', buttons: ['ok'], show: true }
+  }
 }
+
 export class Item {
   constructor(coords, id, name = '', cssclass = '', interact = {}, weight = 0) {
     this.x = coords.x

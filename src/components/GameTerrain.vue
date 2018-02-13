@@ -3,9 +3,9 @@
           <div @click="randomWalk">Go go go</div>
             <div v-for="(row, x) in drawMap" :key="x" class="t-row">
                 <div v-for="(val, y) in row" :key="x+y" :class="val.cssclass" class="t-item" v-if="val.x===x && val.y===y">
-                  <img v-if="characterDrawer(x, y)" :src="characterImg[0]" @click="activate(x, y)"/>
-                  <img v-if="characterImg[1]" :src="characterImg[1]" @click="activate(x, y)"/>
-                  <img v-if="characterImg[2]" :src="characterImg[2]" @click="activate(x, y)"/>
+                <div v-if="characterDrawer(x, y)">
+                  <img v-for="(img, keys) in characterImg" :key="keys" :src="img" @click="activate(x, y)"/>
+                </div>
                 </div>
             </div>
         </div>
@@ -40,7 +40,6 @@ export default {
       let res = false
       for (let key in this.char) {
         if (this.char[key].x === x && this.char[key].y === y) {
-          console.log(key, x, y)
           this.charImg(key)
           res = true
         }

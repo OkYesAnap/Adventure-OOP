@@ -12,7 +12,7 @@
       <div class="text-huge text-white">{{volume.cur}} OF {{volume.max}}</div>
       <Inventory v-show="showInventory" @vol="volume = $event" />
     </div>
-    <dialog-screen v-if="dialog" msg="Hello world" />
+    <dialog-screen v-if="message.show" :message="message" @closer="dialogCloser" @ans="answer = $event"/>
   </section>
 </template>
 
@@ -28,12 +28,20 @@ export default {
     return {
       showInventory: false,
       volume: '',
-      dialog: false
+      answer: ''
     }
   },
   methods: {
     showerInventory() {
       this.showInventory = !this.showInventory
+    },
+    dialogCloser() {
+      this.$store.dispatch('dialogCloser', { answer: this.answer })
+    }
+  },
+  computed: {
+    message: function() {
+      return this.$store.state.dialogMessage
     }
   }
 }

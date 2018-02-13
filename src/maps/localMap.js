@@ -55,14 +55,14 @@ const mapItemCreator = {
   '6': coords => new PickableItem(coords, '6', 'Food', 'food', { pickable: true }, 1, 'You need only to view the movie Super Size Me to understand how foods impact the body')
 }
 
-export const itemRentranslaton = arr =>
+export const itemRetranslaton = arr =>
   arr.map((row, x) =>
     row.map((val, y) => {
       return mapItemCreator[val]({ x: x, y: y })
     })
   )
 
-export const mapItems = itemRentranslaton(maps.location01)
+export const mapItems = itemRetranslaton(maps.location02)
 
 const HEROIMG = 'https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_animation_by_hero_in_pixels.gif'
 const FREDDI = 'http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif'
@@ -79,5 +79,5 @@ export const characters = {
   fred2: characterCreator['F']({ x: 9, y: 9 }),
   fred3: characterCreator['F']({ x: 12, y: 16 }),
   fred4: characterCreator['F']({ x: 11, y: 16 }),
-  cat: characterCreator['C']({ x: 15, y: 16 })
+  cat: characterCreator['C']({ x: 4, y: 6 })
 }

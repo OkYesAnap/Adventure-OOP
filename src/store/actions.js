@@ -14,7 +14,11 @@ export const enter = async ({ commit, state }) => {
     let xLoc = chars[key].x
     let yLoc = chars[key].y
     if (state.terrain[xLoc][yLoc].interact.pickable && chars[key].interact.walker) {
-      commit('addItem', { id: { ...state.terrain[xLoc][yLoc] }, method: chars[key], terMethod: state.terrain[xLoc][yLoc] })
+      if (chars[key].checkOverload(state.terrain[xLoc][yLoc])) {
+        commit('dialogMessage', { type: 'dialogMessage', character: chars[key] })
+      } else {
+        commit('dialogMessage', { type: 'dialogMessage', character: chars[key] })
+      }
     }
   }
 }
@@ -24,5 +28,18 @@ export const activate = async ({ commit, state }, { x, y }) => {
     if (chars[key].x === x && chars[key].y === y) {
       commit('activateCharacter', { character: chars[key] })
     } else commit('deactivateCharacter', { character: chars[key] })
+  }
+}
+
+export const dialogCloser = async ({ commit, state }, { answer }) => {
+  const chars = state.characters
+  for (let key in chars) {
+    let xLoc = chars[key].x
+    let yLoc = chars[key].y
+    if (answer === 'yes') {
+      commit('addItem', { id: { ...state.terrain[xLoc][yLoc] }, method: chars[key] })
+      commit('clearItem', { method: state.terrain[xLoc][yLoc] })
+    }
+    commit('dialogCloser', { message: state.dialogMessage, answer: answer })
   }
 }

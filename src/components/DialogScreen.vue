@@ -1,20 +1,21 @@
 <template>
   <div class="dialog">
-      {{ msg1 }}
-      <input v-model="msg1"/>
+      {{ message.msg }}
       <div class="aligner-space-around">
-          <button class="button block-mobile">Yes</button>
-          <button class="button button-primary block-mobile">No</button>
+          <button v-for="btns in message.buttons" class="button block-mobile" :key="btns" @click="answer(btns)">{{ btns }}</button>
       </div>
   </div>
 </template>
 <script>
 export default {
   props: {
-    msg: String
+    message: Object
   },
-  data: function() {
-    return { msg1: this.msg }
+  methods: {
+    answer: function(btn) {
+      this.$emit('ans', btn)
+      this.$emit('closer')
+    }
   }
 }
 </script>
