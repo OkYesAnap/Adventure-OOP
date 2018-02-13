@@ -3,8 +3,7 @@ export const move = (state, { type, xy }) => {
   type.y = xy.y
 }
 export const clearItem = (state, { method }) => {
-  console.log(state.counter++)
-  if (method.clearItem) method.clearItem()
+  method.clearItem()
 }
 export const addItem = (state, { method, id }) => {
   method.addItem(id)

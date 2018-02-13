@@ -1,7 +1,9 @@
 <template>
   <div class="dialog">
       {{ message.msg }}
-      <div class="aligner-space-around">
+      <div class="picture" v-if="message.cssclass" :class="message.cssclass"></div>
+      <div v-if="message.info">{{message.info}}</div>
+      <div class="aligner-space-around" ref="btn">
           <button v-for="btns in message.buttons" class="button block-mobile" :key="btns" @click="answer(btns)">{{ btns }}</button>
       </div>
   </div>
@@ -16,6 +18,9 @@ export default {
       this.$emit('ans', btn)
       this.$emit('closer')
     }
+  },
+  beforeUpdate() {
+    this.$refs.btn.firstChild.focus()
   }
 }
 </script>
@@ -37,6 +42,13 @@ export default {
   text-transform: uppercase;
   line-height: 30px;
   vertical-align: middle;
+}
+.picture {
+  width: 300px;
+  height: 300px;
+  margin: auto;
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 .button {
   min-width: 100px;

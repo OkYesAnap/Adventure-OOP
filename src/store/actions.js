@@ -36,9 +36,11 @@ export const dialogCloser = async ({ commit, state }, { answer }) => {
   for (let key in chars) {
     let xLoc = chars[key].x
     let yLoc = chars[key].y
-    if (answer === 'yes') {
-      commit('addItem', { id: { ...state.terrain[xLoc][yLoc] }, method: chars[key] })
-      commit('clearItem', { method: state.terrain[xLoc][yLoc] })
+    if (state.terrain[xLoc][yLoc].interact.pickable && chars[key].interact.walker) {
+      if (answer === 'yes') {
+        commit('addItem', { id: { ...state.terrain[xLoc][yLoc] }, method: chars[key] })
+        commit('clearItem', { method: state.terrain[xLoc][yLoc] })
+      }
     }
     commit('dialogCloser', { message: state.dialogMessage, answer: answer })
   }

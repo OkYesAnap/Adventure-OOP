@@ -62,9 +62,23 @@ export class CharWithInventory extends Character {
     let arr = [...this.inventory]
     arr.max = this.inventory.maxVolume
     if (this.inventory.volume + item.weight <= this.inventory.maxVolume) {
-      this.message = { msg: 'Do you want to pickup? ' + item.name, buttons: ['yes', 'no'], cssclass: item.cssclass, show: true }
+      this.message = {
+        msg: 'Do you want to pickup? ' + item.name,
+        buttons: ['yes', 'no'],
+        cssclass: item.cssclass,
+        info: item.info,
+        show: true
+      }
       return true
-    } else this.message = { msg: this.name + ' got overloaded!', buttons: ['ok'], show: true }
+    } else {
+      this.message = {
+        msg: this.name + ' got overloaded!',
+        buttons: ['ok'],
+        cssclass: '',
+        info: '',
+        show: true
+      }
+    }
   }
 }
 

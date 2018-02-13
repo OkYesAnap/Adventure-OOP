@@ -62,7 +62,7 @@ export const itemRetranslaton = arr =>
     })
   )
 
-export const mapItems = itemRetranslaton(maps.location02)
+export const mapItems = itemRetranslaton(maps.location01)
 
 const HEROIMG = 'https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_animation_by_hero_in_pixels.gif'
 const FREDDI = 'http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif'
