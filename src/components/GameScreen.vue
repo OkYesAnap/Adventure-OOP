@@ -8,11 +8,11 @@
       </div>
     </div>
     <div class="invent">
-      <p class="button button-huge block-mobile" @click="showerInventory">Inventory</p>
-      <div class="text-huge text-white">{{volume.cur}} OF {{volume.max}}</div>
-      <Inventory v-show="showInventory" @vol="volume = $event" />
+      <p class="button button-huge block-mobile" @click="showInv">Inventory</p>
+      <div class="text-huge text-white">{{ volume.cur }} OF {{ volume.max }}</div>
+      <Inventory v-show="showInventory" @vol="volume = $event" @manage="manage = $event"/>
     </div>
-    <dialog-screen v-if="message.show" :message="message" @closer="dialogCloser" @ans="answer = $event"/>
+    <dialog-screen v-if="message.show" :message="message" @closer="itemManagerCollector" @ans="answer = $event"/>
   </section>
 </template>
 
@@ -28,15 +28,43 @@ export default {
     return {
       showInventory: false,
       volume: '',
-      answer: ''
+      answer: '',
+      manage: null
     }
   },
   methods: {
-    showerInventory() {
+    showInv() {
       this.showInventory = !this.showInventory
     },
-    dialogCloser() {
-      this.$store.dispatch('dialogCloser', { answer: this.answer })
+    itemManagerCollector() {
+      if (this.manage === null) {
+        let active = {}
+        const ch = this.$store.state.characters
+        for (let key in ch) {
+          if (this.$store.state.terrain[ch[key].x][ch[key].y].interact.pickable && ch[key].interact.walker) {
+            active = ch[key]
+            break
+          }
+        }
+        this.$store.dispatch('itemManager', {
+          answer: this.answer,
+          itemFrom: this.$store.state.terrain,
+          itemTo: active,
+          coord: { x: active.x, y: active.y }
+        })
+      } else {
+        const pick = this.manage.z ? 1 : 0
+        const put = this.manage.z ? 0 : 1
+
+        this.$store.dispatch('itemManager', {
+          answer: this.answer,
+          itemFrom: this.manage.inventories[pick].inventory,
+          itemTo: this.manage.inventories[put],
+          coord: { x: this.manage.x, y: this.manage.y },
+          update: this.manage.inventories[0]
+        })
+      }
+      this.manage = null
     }
   },
   computed: {

@@ -8,16 +8,21 @@ export const action = async ({ commit, state }, { x, y }) => {
     }
   }
 }
-export const enter = async ({ commit, state }) => {
+export const enter = async ({ commit, state }, { item, drop, pick }) => {
   const chars = state.characters
-  for (let key in chars) {
-    let xLoc = chars[key].x
-    let yLoc = chars[key].y
-    if (state.terrain[xLoc][yLoc].interact.pickable && chars[key].interact.walker) {
-      if (chars[key].checkOverload(state.terrain[xLoc][yLoc])) {
-        commit('dialogMessage', { type: 'dialogMessage', character: chars[key] })
-      } else {
-        commit('dialogMessage', { type: 'dialogMessage', character: chars[key] })
+  if (item) {
+    drop.checkDrop(item)
+    commit('dialogMessage', { type: 'dialogMessage', character: drop })
+  } else {
+    for (let key in chars) {
+      let xLoc = chars[key].x
+      let yLoc = chars[key].y
+      if (state.terrain[xLoc][yLoc].interact.pickable && chars[key].interact.walker) {
+        if (chars[key].checkOverload(state.terrain[xLoc][yLoc])) {
+          commit('dialogMessage', { type: 'dialogMessage', character: chars[key] })
+        } else {
+          commit('dialogMessage', { type: 'dialogMessage', character: chars[key] })
+        }
       }
     }
   }
@@ -30,18 +35,11 @@ export const activate = async ({ commit, state }, { x, y }) => {
     } else commit('deactivateCharacter', { character: chars[key] })
   }
 }
-
-export const dialogCloser = async ({ commit, state }, { answer }) => {
-  const chars = state.characters
-  for (let key in chars) {
-    let xLoc = chars[key].x
-    let yLoc = chars[key].y
-    if (state.terrain[xLoc][yLoc].interact.pickable && chars[key].interact.walker) {
-      if (answer === 'yes') {
-        commit('addItem', { id: { ...state.terrain[xLoc][yLoc] }, method: chars[key] })
-        commit('clearItem', { method: state.terrain[xLoc][yLoc] })
-      }
-    }
-    commit('dialogCloser', { message: state.dialogMessage, answer: answer })
+export const itemManager = async ({ commit, state }, { answer, itemFrom, itemTo, coord, update }) => {
+  if (answer === 'yes') {
+    commit('addItem', { item: { ...itemFrom[coord.x][coord.y] }, method: itemTo })
+    commit('clearItem', { method: itemFrom[coord.x][coord.y] })
   }
+  if (update) commit('updateInventory', { char: update })
+  commit('dialogCloser', { message: state.dialogMessage, answer: answer })
 }

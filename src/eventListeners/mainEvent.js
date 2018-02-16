@@ -13,7 +13,7 @@ export default function(event) {
       this.$store.dispatch('action', { x: 0, y: -1 })
       break
     case 13:
-      this.$store.dispatch('enter')
+      this.$store.dispatch('enter', { invManage: false })
       break
   }
 }

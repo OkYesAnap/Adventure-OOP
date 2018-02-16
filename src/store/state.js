@@ -3,7 +3,6 @@ export default function() {
   return {
     characters: characters,
     terrain: mapItems,
-    dialogMessage: { show: false },
-    counter: 0
+    dialogMessage: { show: false }
   }
 }

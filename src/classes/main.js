@@ -49,7 +49,7 @@ export class CharWithInventory extends Character {
         if (arr[x][y].id === ' ') {
           item.x = x
           item.y = y
-          arr[x][y] = item
+          arr[x][y] = new PickableItem({ x: x, y: y }, item.id, item.name, item.cssclass, item.interact, item.weight, item.info)
           this.inventory = this.checkVolume(arr)
           this.inventory.maxVolume = arr.max
           return true
@@ -57,6 +57,15 @@ export class CharWithInventory extends Character {
       }
     }
     this.inventory = arr
+  }
+  checkDrop(item) {
+    this.message = {
+      msg: this.name + ' Do you want to drop? ' + item.name,
+      buttons: ['yes', 'no'],
+      cssclass: item.cssclass,
+      info: item.info,
+      show: true
+    }
   }
   checkOverload(item) {
     let arr = [...this.inventory]
@@ -72,7 +81,7 @@ export class CharWithInventory extends Character {
       return true
     } else {
       this.message = {
-        msg: this.name + ' got overloaded!',
+        msg: this.name + ' overloaded!',
         buttons: ['ok'],
         cssclass: '',
         info: '',
@@ -99,7 +108,7 @@ export class PickableItem extends Item {
     super(coords, id, name, cssclass, interact, weight)
     this.info = info
   }
-  clearItem(coords) {
+  clearItem() {
     const item = { ...this }
     this.id = ' '
     this.name = ''

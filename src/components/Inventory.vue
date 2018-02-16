@@ -1,12 +1,15 @@
 <template>
     <div class="i-wrapper">
-      <div v-for="(char, x) in inventories" :key="x">
+      <div v-for="(char, z) in inventories" :key="z">
         <h1 class="text-huge text-white text-with-subtitle">{{ char.name }}</h1>
         <div v-for="(row, x) in char.inventory" :key="x" class="i-row">
-          <div v-for="(val, y) in row" :key="x+y" :class="val.cssclass" class="i-item" v-if="val.x===x && val.y===y"></div>
+          <div v-for="(val, y) in row" :key="x+y" 
+            v-if="val.x===x && val.y===y"
+             v-bind:class="(focus.x===x && focus.y===y && focus.z===z) ? val.cssclass + ' focused i-item': val.cssclass + ' i-item'"
+             @click="choser(x, y, z)"></div>
         </div>
         </div>
-    <p class="button button-huge">Drop</p>
+    <p class="button button-huge" @click="manageItem">Drop</p>
     </div>
 </template>
 
@@ -14,7 +17,35 @@
 export default {
   name: 'inventory',
   data: function() {
-    return { name: '' }
+    return {
+      name: '',
+      focus: { x: Number, y: Number, z: Number }
+    }
+  },
+  methods: {
+    choser: function(x, y, z) {
+      this.focus.x = x
+      this.focus.y = y
+      this.focus.z = z
+    },
+    manageItem: function() {
+      const ch = this.$store.state.characters
+      let active = {}
+      for (let key in ch) {
+        if (ch[key].interact.walker) {
+          active = ch[key]
+          break
+        }
+      }
+      if (this.focus.x >= 0 && this.focus.y >= 0) {
+        this.$store.dispatch('enter', {
+          item: active.inventory[this.focus.x][this.focus.y],
+          drop: active
+        })
+      }
+      this.$emit('manage', { x: this.focus.x, y: this.focus.y, z: this.focus.z, inventories: this.inventories })
+      this.focus = { x: null, y: null, z: null }
+    }
   },
   computed: {
     inventories: function() {
@@ -22,8 +53,9 @@ export default {
       const ch = this.$store.state.characters
       for (let key in ch) {
         if (ch[key].interact.walker) {
+          invets.push(ch[key])
           for (let key1 in ch) {
-            if (ch[key].x === ch[key1].x && ch[key].y === ch[key1].y) {
+            if (ch[key].x === ch[key1].x && ch[key].y === ch[key1].y && !ch[key1].interact.walker) {
               invets.push(ch[key1])
             }
           }
@@ -57,5 +89,8 @@ export default {
 }
 .mrg {
   margin-bottom: 100px;
+}
+.focused {
+  border: 2px solid red;
 }
 </style>

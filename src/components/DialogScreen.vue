@@ -19,7 +19,7 @@ export default {
       this.$emit('closer')
     }
   },
-  beforeUpdate() {
+  updated() {
     this.$refs.btn.firstChild.focus()
   }
 }
