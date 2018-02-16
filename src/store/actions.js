@@ -10,21 +10,24 @@ export const action = async ({ commit, state }, { x, y }) => {
 }
 export const enter = async ({ commit, state }, { item, drop, pick }) => {
   const chars = state.characters
-  if (item) {
-    drop.checkDrop(item)
-    commit('dialogMessage', { type: 'dialogMessage', character: drop })
-  } else {
-    for (let key in chars) {
-      let xLoc = chars[key].x
-      let yLoc = chars[key].y
-      if (state.terrain[xLoc][yLoc].interact.pickable && chars[key].interact.walker) {
-        if (chars[key].checkOverload(state.terrain[xLoc][yLoc])) {
-          commit('dialogMessage', { type: 'dialogMessage', character: chars[key] })
-        } else {
-          commit('dialogMessage', { type: 'dialogMessage', character: chars[key] })
-        }
-      }
+  for (let key in chars) {
+    const x = chars[key].x
+    const y = chars[key].y
+    if (state.terrain[x][y].interact.pickable && chars[key].interact.walker) {
+      chars[key].checkOverload(state.terrain[x][y])
+      commit('dialogMessage', { type: 'dialogMessage', character: chars[key] })
     }
+  }
+  if (pick) {
+    if (pick.checkOverload(item)) {
+      drop.checkDrop(item, pick.name)
+      commit('dialogMessage', { type: 'dialogMessage', character: drop })
+    } else {
+      commit('dialogMessage', { type: 'dialogMessage', character: pick })
+    }
+  } else if (item) {
+    drop.checkDrop(item, 'DROP?')
+    commit('dialogMessage', { type: 'dialogMessage', character: drop })
   }
 }
 export const activate = async ({ commit, state }, { x, y }) => {

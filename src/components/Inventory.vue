@@ -8,6 +8,7 @@
              v-bind:class="(focus.x===x && focus.y===y && focus.z===z) ? val.cssclass + ' focused i-item': val.cssclass + ' i-item'"
              @click="choser(x, y, z)"></div>
         </div>
+        <div v-if="focus.info !== '' && focus.z===z" class="text-normal text-white">{{ focus.info }}</div>
         </div>
     <p class="button button-huge" @click="manageItem">Drop</p>
     </div>
@@ -19,28 +20,26 @@ export default {
   data: function() {
     return {
       name: '',
-      focus: { x: Number, y: Number, z: Number }
+      focus: { x: Number, y: Number, z: Number, info: '' }
     }
   },
   methods: {
     choser: function(x, y, z) {
-      this.focus.x = x
-      this.focus.y = y
-      this.focus.z = z
+      if (this.inventories[z].inventory[x][y].id !== ' ') {
+        this.focus.x = x
+        this.focus.y = y
+        this.focus.z = z
+        this.focus.info = this.inventories[z].inventory[x][y].info
+      }
     },
     manageItem: function() {
-      const ch = this.$store.state.characters
-      let active = {}
-      for (let key in ch) {
-        if (ch[key].interact.walker) {
-          active = ch[key]
-          break
-        }
-      }
-      if (this.focus.x >= 0 && this.focus.y >= 0) {
+      if (this.focus.x != null) {
+        const drop = this.focus.z
+        const put = Math.abs(this.focus.z - 1)
         this.$store.dispatch('enter', {
-          item: active.inventory[this.focus.x][this.focus.y],
-          drop: active
+          item: this.inventories[drop].inventory[this.focus.x][this.focus.y],
+          drop: this.inventories[drop],
+          pick: this.inventories[put]
         })
       }
       this.$emit('manage', { x: this.focus.x, y: this.focus.y, z: this.focus.z, inventories: this.inventories })

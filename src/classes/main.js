@@ -58,9 +58,9 @@ export class CharWithInventory extends Character {
     }
     this.inventory = arr
   }
-  checkDrop(item) {
+  checkDrop(item, giveto = '') {
     this.message = {
-      msg: this.name + ' Do you want to drop? ' + item.name,
+      msg: this.name + ' Do you want to give? ' + item.name + ' ' + giveto,
       buttons: ['yes', 'no'],
       cssclass: item.cssclass,
       info: item.info,

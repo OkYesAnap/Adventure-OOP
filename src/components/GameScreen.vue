@@ -53,15 +53,15 @@ export default {
           coord: { x: active.x, y: active.y }
         })
       } else {
-        const pick = this.manage.z ? 1 : 0
-        const put = this.manage.z ? 0 : 1
+        const pick = this.manage.z
+        const put = Math.abs(this.manage.z - 1)
 
         this.$store.dispatch('itemManager', {
           answer: this.answer,
           itemFrom: this.manage.inventories[pick].inventory,
           itemTo: this.manage.inventories[put],
           coord: { x: this.manage.x, y: this.manage.y },
-          update: this.manage.inventories[0]
+          update: this.manage.inventories[pick]
         })
       }
       this.manage = null
