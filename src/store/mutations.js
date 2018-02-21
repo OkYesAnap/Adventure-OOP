@@ -34,3 +34,26 @@ export const updateInventory = (state, { char }) => {
     }
   }
 }
+export const saveNewState = (state, { key, value }) => {
+  localStorage.setItem(key, JSON.stringify(value))
+}
+export const fight = (state, monster) => {
+  state.currentNPC = monster
+}
+export const notToFight = (state) => {
+  state.currentNPC = null
+}
+
+export const startFight = (state) => {
+  state.currentNPC.startFight(true)
+}
+export const hitMonster = (state, hit) => {
+  state.characters.hero.hit(state.currentNPC, hit)
+}
+export const changeImg = (state, monster) => {
+  monster.img = 'http://moziru.com/images/tombstone-clipart-20.png'
+  monster.interact.cantWalk = false
+}
+export const finishFight = (state) => {
+  state.currentNPC.status = -1
+}

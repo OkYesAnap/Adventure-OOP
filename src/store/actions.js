@@ -3,9 +3,21 @@ export const action = async ({ commit, state }, { x, y }) => {
   for (let key in chars) {
     let xLoc = chars[key].x + x
     let yLoc = chars[key].y + y
+
+    for (let i in chars) {
+      if (chars[i].interact.isMonster && chars[i].x === xLoc && chars[i].y === yLoc) {
+        commit('fight', chars[i])
+      }
+    }
+
     if (!state.terrain[xLoc][yLoc].interact.cantWalk && chars[key].interact.walker) {
       commit('move', { type: chars[key], xy: { x: xLoc, y: yLoc } })
     }
+  }
+}
+export const checkstatus = async ({ commit, state }, monster) => {
+  if (monster.status === 4) {
+    commit('changeImg', monster)
   }
 }
 export const enter = async ({ commit, state }, { item, drop, pick }) => {

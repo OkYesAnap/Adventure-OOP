@@ -5,6 +5,7 @@
         <h3 class="text-huge text-white text-with-subtitle">We can be heroes</h3>
         <h4 class="text-big text-gray">just for one day</h4>
         <GameTerrain></GameTerrain>
+        <Fight-window v-if="this.$store.state.currentNPC != null && this.$store.state.currentNPC.status !== -1"/>
       </div>
     </div>
     <div class="invent">
@@ -20,10 +21,11 @@
 import GameTerrain from './GameTerrain'
 import Inventory from './Inventory'
 import DialogScreen from './DialogScreen'
+import FightWindow from './FightWindow'
 
 export default {
   name: 'GameScreen',
-  components: { GameTerrain, Inventory, DialogScreen },
+  components: { GameTerrain, Inventory, DialogScreen, FightWindow },
   data: function() {
     return {
       showInventory: false,
@@ -70,6 +72,9 @@ export default {
   computed: {
     message: function() {
       return this.$store.state.dialogMessage
+    },
+    fightWindow: function() {
+      return this.$store.state.currentNPC != null
     }
   }
 }
