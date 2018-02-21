@@ -21,7 +21,7 @@
 import GameTerrain from './GameTerrain'
 import Inventory from './Inventory'
 import DialogScreen from './DialogScreen'
-import FightWindow from './FightWindow'
+// import FightWindow from './FightWindow'
 
 export default {
   name: 'GameScreen',
