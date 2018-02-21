@@ -1,5 +1,5 @@
 export const action = async ({ commit, state }, { x, y }) => {
-  const characterTypes = state.character
+  const characterTypes = state.characters
   for (let characterType in characterTypes) {
     const character = characterTypes[characterType]
     let xLoc = character.x + x

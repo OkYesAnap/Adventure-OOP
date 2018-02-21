@@ -66,7 +66,7 @@ export const mapItems = itemRetranslaton(maps.location01)
 
 const HEROIMG = 'https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_animation_by_hero_in_pixels.gif'
 const FREDDI = 'http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif'
-// const CAT = 'http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif'
+const CAT = 'http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif'
 const characterCreator = {
   H: coords => new CharWithInventory(coords, 'H', 'Hero', HEROIMG, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
   F: coords =>
@@ -86,12 +86,13 @@ const characterCreator = {
         5: { message: 'hero loose!', links: [5] }
       },
       40
-    )
+    ),
+  C: coords => new CharWithInventory(coords, 'C', 'Cat', CAT, { walker: false }, { invHeight: 2, invWidth: 3, maxVolume: 10 }, null, 10)
 }
 export const currentNPC = null
 export const characters = {
-  chest: characterCreator['CH']({ x: 1, y: 1 }),
   hero: characterCreator['H']({ x: 1, y: 1 }),
   Monster: characterCreator['F']({ x: 6, y: 4 }),
-  fred2: characterCreator['F']({ x: 9, y: 9 })
+  fred2: characterCreator['F']({ x: 9, y: 9 }),
+  cat: characterCreator['C']({ x: 3, y: 1 })
 }
