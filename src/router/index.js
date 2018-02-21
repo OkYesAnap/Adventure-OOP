@@ -4,6 +4,7 @@ import MainMenu from '../components/MainMenu'
 import GameScreen from '../components/GameScreen'
 import SaveScreen from '../components/SaveScreen'
 import LoadScreen from '../components/LoadScreen'
+import DevelopersScreen from '../components/DevelopersScreen'
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +28,11 @@ export default new Router({
       path: '/load',
       name: 'LoadScreen',
       component: LoadScreen
+    },
+    {
+      path: '/developers',
+      name: 'DevelopersScreen',
+      component: DevelopersScreen
     }
   ]
 })
