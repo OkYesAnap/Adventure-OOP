@@ -1,12 +1,18 @@
+import { mapItemCreator } from '../maps/localMap'
 export const move = (state, { type, xy }) => {
   type.x = xy.x
   type.y = xy.y
 }
 export const clearItem = (state, { method }) => {
   method.clearItem()
+  console.log(state.terrain)
 }
 export const addItem = (state, { method, item }) => {
   method.addItem(item)
+}
+export const dropItem = (state, { item, to }) => {
+  state.terrain[to.x][to.y] = mapItemCreator[item.id]({ x: to.x, y: to.y })
+  state.terrain = [...state.terrain]
 }
 export const activateCharacter = (state, { character }) => {
   character.interact.walker = true

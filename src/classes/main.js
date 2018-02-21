@@ -58,10 +58,11 @@ export class CharWithInventory extends Character {
     }
     this.inventory = arr
   }
-  checkDrop(item, giveto = '') {
+  dropItem(item, coords) {}
+  checkDrop(item, take = '', giveto = '', btns) {
     this.message = {
-      msg: this.name + ' Do you want to give? ' + item.name + ' ' + giveto,
-      buttons: ['yes', 'no'],
+      msg: this.name + ` Do you want ${take} ${giveto}?`,
+      buttons: btns,
       cssclass: item.cssclass,
       info: item.info,
       show: true
@@ -109,13 +110,12 @@ export class PickableItem extends Item {
     this.info = info
   }
   clearItem() {
-    const item = { ...this }
     this.id = ' '
     this.name = ''
     this.cssclass = ''
     this.interact = {}
     this.weight = 0
     this.interact = ''
-    return item
+    this.info = ''
   }
 }

@@ -8,9 +8,9 @@
              v-bind:class="(focus.x===x && focus.y===y && focus.z===z) ? val.cssclass + ' focused i-item': val.cssclass + ' i-item'"
              @click="choser(x, y, z)"></div>
         </div>
+        <p class="button button-huge" @click="manageItem(inventories)" v-if="!z">{{ inventories.length > 1 ? `give to ${inventories[1].name}`:'drop'}}</p>
         <div v-if="focus.info !== '' && focus.z===z" class="text-normal text-white">{{ focus.info }}</div>
         </div>
-    <p class="button button-huge" @click="manageItem">Drop</p>
     </div>
 </template>
 
