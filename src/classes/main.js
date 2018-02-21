@@ -1,20 +1,24 @@
 import { itemRetranslaton } from '../maps/localMap'
 
 export class Character {
-  constructor(coords, id, name, img, interact) {
+  constructor(coords, id, name, img, interact, punch) {
     this.x = coords.x
     this.y = coords.y
     this.id = id
     this.name = name
     this.img = img
     this.interact = interact
+    this.hp = 100
+    this.punch = punch
   }
 }
 
 export class CharWithInventory extends Character {
-  constructor(coords, id, name, img, interact = {}, inventory) {
-    super(coords, id, name, img, interact)
+  constructor(coords, id, name, img, interact = {}, inventory, actions = {}, punch) {
+    super(coords, id, name, img, interact, punch)
     this.inventory = this.emptyInventory(inventory)
+    this.actions = actions
+    this.status = 0
   }
   emptyInventory(inv) {
     let inventory = []
@@ -89,6 +93,35 @@ export class CharWithInventory extends Character {
         show: true
       }
     }
+  }
+  hit(monster, hit) {
+    let hitHP = monster.fighting(hit)
+    if (hitHP === -1) {
+      return
+    }
+    this.hp -= hitHP
+    if (this.hp <= 0) {
+      monster.status = monster.actions[monster.status].links[1]
+    }
+  }
+  isInlocation(x, y) {
+    return this.x === x && this.y === y
+  }
+  startFight(wantFight) {
+    if (this.status === 0) {
+      this.status = wantFight ? this.actions[this.status].links[1] : this.status
+    }
+  }
+  fighting(hitHP) {
+    let self = this
+    this.hp -= hitHP
+    this.status = this.actions[this.status].links[0]
+    if (this.hp <= 0) {
+      this.status = this.actions[this.status].links[1]
+      return -1
+    }
+    self.status = self.actions[self.status].links[0]
+    return this.punch
   }
 }
 

@@ -66,24 +66,32 @@ export const mapItems = itemRetranslaton(maps.location01)
 
 const HEROIMG = 'https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_animation_by_hero_in_pixels.gif'
 const FREDDI = 'http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif'
-const CAT = 'http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif'
-const CHEST = 'https://i.pinimg.com/736x/b4/c0/f4/b4c0f4c875b7186507479f4368f2276b.jpg'
-const PREDATOR = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSLdM0toWhhFebcNgOz2GRouT4DE4w325HMYYFCJWWlwLnkAwBE'
-
+// const CAT = 'http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif'
 const characterCreator = {
-  H: coords => new CharWithInventory(coords, 'H', 'Hero', HEROIMG, { walker: true }, { invHeight: 5, invWidth: 5, maxVolume: 100 }),
-  F: coords => new CharWithInventory(coords, 'F', 'Freddi', FREDDI, { walker: false }, { invHeight: 3, invWidth: 5, maxVolume: 50 }),
-  C: coords => new CharWithInventory(coords, 'C', 'CAT', CAT, { walker: false }, { invHeight: 2, invWidth: 2, maxVolume: 4 }),
-  CH: coords => new CharWithInventory(coords, 'CH', 'CHEST', CHEST, { walker: false }, { invHeight: 7, invWidth: 5, maxVolume: 1000 }),
-  PR: coords => new CharWithInventory(coords, 'PR', 'PREDATOR', PREDATOR, { walker: false }, { invHeight: 4, invWidth: 4, maxVolume: 500 })
+  H: coords => new CharWithInventory(coords, 'H', 'Hero', HEROIMG, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  F: coords =>
+    new CharWithInventory(
+      coords,
+      'F',
+      'Freddy',
+      FREDDI,
+      { walker: false, isMonster: true },
+      { invHeight: 10, invWidth: 5, maxVolume: 50 },
+      {
+        0: { message: 'Do you want to fight?', links: [0, 1] },
+        1: { message: 'Now you are fighting', links: [2] },
+        2: { message: 'You hit monster!', links: [3, 4] },
+        3: { message: 'Monster hit', links: [2, 5] },
+        4: { message: 'hero win!', links: [4] },
+        5: { message: 'hero loose!', links: [5] }
+      },
+      40
+    )
 }
-
+export const currentNPC = null
 export const characters = {
   chest: characterCreator['CH']({ x: 1, y: 1 }),
   hero: characterCreator['H']({ x: 1, y: 1 }),
-  fred1: characterCreator['F']({ x: 6, y: 4 }),
-  fred2: characterCreator['F']({ x: 9, y: 9 }),
-  fred3: characterCreator['PR']({ x: 12, y: 16 }),
-  fred4: characterCreator['F']({ x: 11, y: 16 }),
-  cat: characterCreator['C']({ x: 4, y: 6 })
+  Monster: characterCreator['F']({ x: 6, y: 4 }),
+  fred2: characterCreator['F']({ x: 9, y: 9 })
 }
