@@ -37,15 +37,20 @@
         <button class="button button-primary block-mobile" @click="SuperAttsck">Super Attsck</button>
       </div>
       <div class="bottom-btn" v-else-if="bot.status === 4 ||  bot.status === 5">
-        <button class="button button-primary block-mobile" @click="getNoAnsver">Finish fight</button>
+        <button class="button button-primary block-mobile"  v-if="bot.status === 4"  @click="getNoAnsver">Finish fight</button>
+        <button class="button button-primary block-mobile"  v-if="bot.status === 5"  @click="heroloose">Start new game</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import DevelopersScreen from './DevelopersScreen'
   export default {
     name: 'fight-window',
+    components: {
+      DevelopersScreen
+    },
     methods: {
       getNoAnsver() {
         this.$store.dispatch('checkstatus', this.$store.state.currentNPC)
@@ -53,6 +58,9 @@
       },
       battleYes() {
         this.$store.commit('startFight')
+      },
+      heroloose() {
+        this.$router.push({ name: 'MainMenu' })
       },
       battleNop() {
         this.$store.commit('notToFight')
