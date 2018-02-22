@@ -42,6 +42,9 @@ export const updateInventory = (state, { char }) => {
 export const saveNewState = (state, { key, value }) => {
   localStorage.setItem(key, JSON.stringify(value))
 }
+export const loaderGame = (state, { loadedGame }) => {
+  Object.assign(state, JSON.parse(loadedGame))
+}
 export const fight = (state, monster) => {
   state.currentNPC = monster
 }
