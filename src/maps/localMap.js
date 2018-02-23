@@ -1,6 +1,5 @@
 import { Item, PickableItem, CharWithInventory } from '../classes/main'
 import { Quest } from '../classes/Quest'
-import { WSAESHUTDOWN } from 'constants'
 const maps = {
   location01: [
     ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'],
@@ -70,8 +69,10 @@ const HEROIMG = 'https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_ani
 const FREDDI = 'http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif'
 const GNOMEQUEST = 'http://3.bp.blogspot.com/-OgbmYzOUhnY/UYfrEjPnriI/AAAAAAAAAr8/lbOlb5AgBIc/s1600/AnimatedLeprechaunDancing.gif'
 const CATQUEST = 'http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif'
+const TREASURE = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5oEjh1sjyWsewELv83boE_EPLUKItNp5hndBtWSPE21QTUg_zng'
 const characterCreator = {
   H: coords => new CharWithInventory(coords, 'H', 'Hero', HEROIMG, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  T: coords => new CharWithInventory(coords, 'T', 'treasure', TREASURE, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
   F: coords =>
     new CharWithInventory(
       coords,
@@ -108,10 +109,14 @@ const characterCreator = {
         1: {
           badAnsver: 4,
           ansver: 3,
-          msg: 'Can you bring me 3 food? And i will pass you to the treasure',
+          msg: 'Can you bring me 3 food? And i will give you a treasure',
           links: 4
         },
-        3: { msg: 'Ok you bring me all items you can go' },
+        3: {
+          ansver: 3,
+          links: 3,
+          msg: 'Ok you bring me all food now i give you treasure'
+        },
         4: {
           msg: 'I ask you for 3 food but you bring me',
           badAnsver: 4,
@@ -180,5 +185,6 @@ export const characters = {
   Monster: characterCreator['F']({ x: 6, y: 4 }),
   fred2: characterCreator['F']({ x: 9, y: 9 }),
   catQuest: characterCreator['c']({ x: 14, y: 1 }),
-  gnomeQuest: characterCreator['g']({ x: 18, y: 13 })
+  gnomeQuest: characterCreator['g']({ x: 18, y: 13 }),
+  treasure: characterCreator['T']({ x: 18, y: 9 })
 }

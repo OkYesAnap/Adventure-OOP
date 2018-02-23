@@ -5,6 +5,9 @@ export default function() {
     terrain: mapItems,
     currentNPC: currentNPC,
     dialogMessage: { show: false },
-    counter: 0
+    modalWindow: {
+      opening: false,
+      info: ''
+    }
   }
 }

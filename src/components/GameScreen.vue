@@ -5,6 +5,7 @@
         <h3 class="text-huge text-white text-with-subtitle">We can be heroes</h3>
         <h4 class="text-big text-gray">just for one day</h4>
         <GameTerrain></GameTerrain>
+        <PopupWindow v-show="this.$store.getters.OpeningClosePopup.opening"></PopupWindow>
         <Fight-window v-if="this.$store.state.currentNPC != null && this.$store.state.currentNPC.status !== -1"/>
       </div>
     </div>
@@ -22,10 +23,11 @@ import GameTerrain from './GameTerrain'
 import Inventory from './Inventory'
 import DialogScreen from './DialogScreen'
 import FightWindow from './FightWindow'
+import PopupWindow from './PopupWindow'
 
 export default {
   name: 'GameScreen',
-  components: { GameTerrain, Inventory, DialogScreen, FightWindow },
+  components: { GameTerrain, Inventory, DialogScreen, FightWindow, PopupWindow },
   data: function() {
     return {
       showInventory: false,
@@ -39,19 +41,10 @@ export default {
       this.showInventory = !this.showInventory
     },
     itemManagerCollector() {
-      for (let speakCharacter in this.$store.state.characters) {
-        // console.log('speakCharacter', speakCharacter)
-        if (this.$store.state.characters[speakCharacter].dialog) {
-          //this.manage = 'speak'
-          // this.$store.dispatch('itemManager',
-        }
-      }
-
-      // if (this.manage === 'speak') {
-      //   return
-      // } else
-      console.log('ch', this.$store.state.characters)
-      console.log('ansver', this.ansver)
+      // for (let speakCharacter in this.$store.state.characters) {
+      //   if (this.$store.state.characters[speakCharacter].dialog) {
+      //   }
+      // }
       if (this.manage === null) {
         let active = {}
         const ch = this.$store.state.characters

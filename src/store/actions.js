@@ -1,4 +1,5 @@
 export const action = async ({ commit, state }, { x, y }) => {
+  commit('stopTalk', state)
   const characterTypes = state.characters
   for (let characterType in characterTypes) {
     const character = characterTypes[characterType]
@@ -10,8 +11,15 @@ export const action = async ({ commit, state }, { x, y }) => {
         commit('fight', characterTypes[i])
       }
       if (characterTypes[i].interact.isQuestMonster && characterTypes[i].x === xLoc && characterTypes[i].y === yLoc) {
-        // start open window for Quest
-        commit('dialogMessage', characterTypes[i].openWindowFirstTime(state))
+        if (characterTypes[i].name !== 'gnomeQuest') {
+          commit('getStartTalk', state.characters[characterTypes[i].name].startingTalk(state, characterTypes[i]))
+        } else {
+          commit('getStartTalkGnome', state.characters[characterTypes[i].name].startingTalk(state, character))
+          // if (characterTypes[i].dialog.start === 3) {
+          //   commit('getTreasure')
+          // }
+        }
+        // ////////
       }
     }
     if (!targetItem.interact.cantWalk && character.interact.walker) {
@@ -21,18 +29,14 @@ export const action = async ({ commit, state }, { x, y }) => {
 }
 // chose Quest methods
 
-export const checkingAnswerFromQuest = async ({ commit, state }, { btns, message }) => {
-  switch (message.cssclass) {
+export const checkingAnswer = async ({ commit, state }, { item, dialog }) => {
+  switch (dialog.class) {
     case 'catQuest':
-      commit('listeningAnsver', state.characters[message.cssclass].answeringOnEnigma(state, btns, message))
-      commit('dialogMessage', { type: 'dialogMessage', character: state.characters[message.cssclass] })
-
-      // commit('listeningAnsver', state.characters[message.cssclass].answeringOnEnigma(state, btns, message))
-      // commit('dialogMessage', state.characters[message.cssclass].openWindowFirstTime(state))
+      commit('listeningAnsver', state.characters[dialog.class].answeringOnEnigma(state, item, dialog))
       break
-    //   case 'gnomeQuest':
-    //     // commit('сheckingbasket', state.hero[dialog.class].сheckingbasket(state, { item, dialog }))
-    //     break
+    case 'gnomeQuest':
+      // commit('сheckingbasket', state.hero[dialog.class].сheckingbasket(state, { item, dialog }))
+      break
   }
 }
 
@@ -41,6 +45,7 @@ export const checkstatus = async ({ commit, state }, monster) => {
     commit('changeImg', monster)
   }
 }
+
 export const enter = async ({ commit, state }, { item, drop, pick }) => {
   const chars = state.characters
   for (let key in chars) {

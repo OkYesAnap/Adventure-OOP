@@ -5,91 +5,70 @@ export class Quest extends CharWithInventory {
     this.dialog = dialog
   }
   startingTalk(state, whoComeToMe) {
-    this.whoComeToMe = whoComeToMe
     switch (this.name) {
       case 'catQuest':
         return this.answeringOnEnigma(state)
       case 'gnomeQuest':
-        return this.сheckingbasket(state)
+        return this.сheckingbasket(state, whoComeToMe)
     }
   }
-  openWindowFirstTime(state) {
-    this.message = {
-      msg: this.dialog[this.dialog.start].msg,
-      buttons: this.dialog[this.dialog.start].buttons,
-      cssclass: this.name,
-      info: '',
-      show: true
-    }
-    console.log('this', this)
+
+  listenAnsweringFromItems(state, item, dialog) {
     return {
-      type: 'dialogMessage',
-      character: this
+      start: this.dialog[this.dialog.start].links,
+      whospeaks: this,
+      info: {
+        name: this.class,
+        class: this.class,
+        mess: this.dialog[this.dialog[this.dialog.start].links].mess,
+        options: this.dialog[this.dialog[this.dialog.start].links].options,
+        quest: this
+      }
     }
   }
   answeringOnEnigma(state, item, dialog) {
-    // console.log(' item', item)
-    // console.log(' dialog', dialog)
-
-    // console.log('this.dialog[this.dialog.start].ansver', this.dialog[this.dialog.start].ansver)
-
+    if (item === 'no') {
+      return {
+        opening: false
+      }
+    }
+    if (item === undefined) {
+      return {
+        opening: true,
+        quest: this,
+        info: {
+          name: this.name,
+          class: this.name,
+          mess: this.dialog[this.dialog.start].msg,
+          options: this.dialog[this.dialog.start].buttons,
+          quest: this
+        }
+      }
+    }
     if (item === this.dialog[this.dialog.start].ansver) {
       return {
         start: this.dialog[this.dialog.start].links,
-        who: this,
-        arror: ''
+        whospeaks: this,
+        info: {
+          badAnsver: '',
+          name: this.name,
+          class: this.name,
+          mess: this.dialog[this.dialog[this.dialog.start].links].msg,
+          options: this.dialog[this.dialog[this.dialog.start].links].buttons,
+          quest: this
+        }
       }
     } else {
       return {
-        type: 'dialogMessage',
-        character: this,
         start: this.dialog.start,
-        who: this,
-        arror: { arror: this.dialog[this.dialog[this.dialog.start].badAnsver].msg }
+        whospeaks: this,
+        info: {
+          badAnsver: this.dialog[this.dialog[this.dialog.start].badAnsver].msg
+        }
       }
     }
   }
-  openWindow(state) {
-    return {
-      type: 'dialogMessage',
-      character: this
-    }
-  }
-  // return {
-  //   type: 'dialogMessage',
-  //   character: this,
-  //   info: start
-  // }
-  // if (item === 'no') {
-  //   return {
-  //     opening: false
-  //   }
-  // }
-  // if (item === undefined) {
-  //   return {
-  //     opening: true,
-  //     quest: this,
-  //     info: {
-  //       name: this.class,
-  //       class: this.class,
-  //       mess: this.dialog[this.dialog.start].mess,
-  //       options: this.dialog[this.dialog.start].options,
-  //       quest: this
-  //     }
-  //   }
-  // }
-
-  // else {
-  //   return {
-  //     start: this.dialog.start,
-  //     whospeaks: this,
-  //     info: {
-  //       badAnsver: this.dialog[this.dialog[this.dialog.start].badAnsver].mess
-  //     }
-  //   }
-  // }
-
-  сheckingbasket(state) {
+  сheckingbasket(state, whoComeToMe) {
     let foods = 0
     if (this.dialog.start === 0 || this.dialog.start === 1) {
       return {
@@ -97,17 +76,18 @@ export class Quest extends CharWithInventory {
         start: this.dialog[this.dialog.start].links,
         whospeaks: this,
         info: {
-          name: this.class,
-          class: this.class,
-          mess: this.dialog[this.dialog.start].mess,
+          name: this.name,
+          class: this.name,
+          mess: this.dialog[this.dialog.start].msg,
           options: this.dialog[this.dialog.start].options
         }
       }
     }
+
     if (this.dialog.start > 1) {
-      this.whoComeToMe.inventory.map(first =>
+      whoComeToMe.inventory.map(first =>
         first.map(item => {
-          if (item.name === 'food') {
+          if (item.name === 'Food') {
             foods++
           }
         })
@@ -118,9 +98,9 @@ export class Quest extends CharWithInventory {
           start: this.dialog[this.dialog.start].badAnsver,
           whospeaks: this,
           info: {
-            name: this.class,
-            class: this.class,
-            mess: this.dialog[this.dialog[this.dialog.start].badAnsver].mess,
+            name: this.name,
+            class: this.name,
+            mess: this.dialog[this.dialog[this.dialog.start].badAnsver].msg,
             food: foods
           }
         }
@@ -131,9 +111,9 @@ export class Quest extends CharWithInventory {
           start: this.dialog[this.dialog.start].links,
           whospeaks: this,
           info: {
-            name: this.class,
-            class: this.class,
-            mess: this.dialog[this.dialog[this.dialog.start].links].mess
+            name: this.name,
+            class: this.name,
+            mess: this.dialog[this.dialog[this.dialog.start].links].msg
           }
         }
       }
