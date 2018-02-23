@@ -32,7 +32,7 @@ export default {
         this.focus.info = this.inventories[z].inventory[x][y].info
       }
     },
-    manageItem: function() {
+    manageItem: function(inv) {
       if (this.focus.x != null) {
         const drop = this.focus.z
         const put = Math.abs(this.focus.z - 1)
@@ -42,6 +42,7 @@ export default {
           pick: this.inventories[put]
         })
       }
+      console.log('manageItem', this)
       this.$emit('manage', { x: this.focus.x, y: this.focus.y, z: this.focus.z, inventories: this.inventories })
       this.focus = { x: null, y: null, z: null }
     }

@@ -1,25 +1,51 @@
 export const action = async ({ commit, state }, { x, y }) => {
+  commit('stopTalk', state)
   const characterTypes = state.characters
   for (let characterType in characterTypes) {
     const character = characterTypes[characterType]
     let xLoc = character.x + x
     let yLoc = character.y + y
+    const targetItem = state.terrain[xLoc][yLoc]
     for (let i in characterTypes) {
       if (characterTypes[i].interact.isMonster && characterTypes[i].x === xLoc && characterTypes[i].y === yLoc) {
         commit('fight', characterTypes[i])
       }
+      if (characterTypes[i].interact.isQuestMonster && characterTypes[i].x === xLoc && characterTypes[i].y === yLoc) {
+        if (characterTypes[i].name !== 'gnomeQuest') {
+          commit('getStartTalk', state.characters[characterTypes[i].name].startingTalk(state, characterTypes[i]))
+        } else {
+          commit('getStartTalkGnome', state.characters[characterTypes[i].name].startingTalk(state, character))
+          // if (characterTypes[i].dialog.start === 3) {
+          //   commit('getTreasure')
+          // }
+        }
+        // ////////
+      }
     }
-    const targetItem = state.terrain[xLoc][yLoc]
     if (!targetItem.interact.cantWalk && character.interact.walker) {
       commit('move', { type: character, xy: { x: xLoc, y: yLoc } })
     }
   }
 }
+// chose Quest methods
+
+export const checkingAnswer = async ({ commit, state }, { item, dialog }) => {
+  switch (dialog.class) {
+    case 'catQuest':
+      commit('listeningAnsver', state.characters[dialog.class].answeringOnEnigma(state, item, dialog))
+      break
+    case 'gnomeQuest':
+      // commit('сheckingbasket', state.hero[dialog.class].сheckingbasket(state, { item, dialog }))
+      break
+  }
+}
+
 export const checkstatus = async ({ commit, state }, monster) => {
   if (monster.status === 4) {
     commit('changeImg', monster)
   }
 }
+
 export const enter = async ({ commit, state }, { item, drop, pick }) => {
   const chars = state.characters
   for (let key in chars) {

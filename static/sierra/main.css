@@ -6,7 +6,6 @@
 }
 .monster {
   background-image: url('http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif');
-
 }
 .hero {
   background-image: url('https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_animation_by_hero_in_pixels.gif');
@@ -14,10 +13,19 @@
 .hero-target {
   background-image: url('http://worldartsme.com/images/batman-transparent-background-clipart-1.jpg');
 }
+.gnomeQuest {
+  background-image: url('http://3.bp.blogspot.com/-OgbmYzOUhnY/UYfrEjPnriI/AAAAAAAAAr8/lbOlb5AgBIc/s1600/AnimatedLeprechaunDancing.gif');
+  background-repeat: no-repeat;
+  background-color: #18232f;
+  background-size: 100%;
+}
 .button {
   min-width: 260px;
 }
 .enigma {
+  background-image: url('http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif');
+}
+.catQuest {
   background-image: url('http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif');
 }
 .enigma-key {

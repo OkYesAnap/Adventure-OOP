@@ -4,6 +4,10 @@ export default function() {
     characters: characters,
     terrain: mapItems,
     currentNPC: currentNPC,
-    dialogMessage: { show: false }
+    dialogMessage: { show: false },
+    modalWindow: {
+      opening: false,
+      info: ''
+    }
   }
 }

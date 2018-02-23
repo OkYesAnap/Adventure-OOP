@@ -20,10 +20,13 @@ export const deactivateCharacter = (state, { character }) => {
   character.interact.walker = false
 }
 export const dialogMessage = (state, { type, character }) => {
-  for (let key in character.message) {
-    state[type][key] = character.message[key]
+  if (character.message) {
+    for (let key in character.message) {
+      state[type][key] = character.message[key]
+    }
+
+    state[type] = { ...state[type] }
   }
-  state[type] = { ...state[type] }
 }
 export const dialogCloser = (state, { message, answer }) => {
   message.show = false
@@ -64,4 +67,33 @@ export const changeImg = (state, monster) => {
 }
 export const finishFight = state => {
   state.currentNPC.status = -1
+}
+
+// ////
+export const stopTalk = state => {
+  state.modalWindow.opening = false
+}
+
+export const getStartTalk = (state, { opening, info }) => {
+  state.modalWindow.opening = opening
+  state.modalWindow.info = info
+  state.modalWindow = { ...state.modalWindow }
+}
+export const getStartTalkGnome = (state, { opening, start, whospeaks, info }) => {
+  state.characters[whospeaks.name].dialog.start = start
+  state.modalWindow.opening = opening
+  state.modalWindow.info = info
+  state.modalWindow = { ...state.modalWindow }
+  if (start === 3) {
+    state.characters.treasure.img = 'https://www.chitalnya.ru/upload/208/96353343315422.gif'
+  }
+}
+export const listeningAnsver = (state, { whospeaks, start, info }) => {
+  if (info) {
+    state.characters[whospeaks.name].dialog.start = start
+    state.modalWindow.info = Object.assign(state.modalWindow.info, info)
+    state.modalWindow.info = { ...state.modalWindow.info }
+  } else {
+    state.modalWindow.opening = false
+  }
 }
