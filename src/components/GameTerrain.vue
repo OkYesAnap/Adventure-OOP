@@ -82,7 +82,6 @@ export default {
   background-color: white;
   position: relative;
   flex: auto;
-
 }
 img {
   height: 100%;
