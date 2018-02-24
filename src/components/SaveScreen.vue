@@ -33,73 +33,127 @@
   </section>
 </template>
 <script>
-  import ErrorResaveWindow from './errorResaveWindow'
-  export default {
-    components: { ErrorResaveWindow },
-    name: 'SaveScreen',
-    data: function() {
-      return {
-        warningWindow: false,
-        showResaveBtn: '',
-        currentName: '',
-        name: '',
-        dataSave: '',
-        saveObjectsArray: []
+import ErrorResaveWindow from './errorResaveWindow'
+export default {
+  components: { ErrorResaveWindow },
+  name: 'SaveScreen',
+  data: function() {
+    return {
+      warningWindow: false,
+      showResaveBtn: '',
+      currentName: '',
+      name: '',
+      dataSave: '',
+      saveObjectsArray: []
+    }
+  },
+  methods: {
+    takeСurrentName(names) {
+      this.currentName = names
+      this.name = names
+    },
+    getFormattedDate(date) {
+      return (
+        date.getFullYear() +
+        '-' +
+        (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : '' + (date.getMonth() + 1)) +
+        '-' +
+        (date.getDate() < 10 ? '0' + date.getDate() : '' + date.getDate()) +
+        ' ' +
+        (date.getHours() < 10 ? '0' + date.getHours() : '' + date.getHours()) +
+        ':' +
+        (date.getMinutes() < 10 ? '0' + date.getMinutes() : '' + date.getMinutes())
+      )
+    },
+    save() {
+      if (this.currentName === '') {
+        if (this.name !== '') {
+          let saveObject = {
+            id: this.name,
+            state: JSON.stringify({
+              characters: (() => {
+                let chs = []
+                const characters = this.$store.state.characters
+                const terrain = this.$store.state.terrain
+                terrain.forEach((row, x) => {
+                  chs.push([])
+                  row.forEach((element, y) => {
+                    let val = ' '
+                    for (let key in characters) {
+                      if (characters[key].x === x && characters[key].y === y) {
+                        val = characters[key].id
+                      }
+                    }
+                    chs[x].push(val)
+                  })
+                })
+                return chs
+              })(),
+              terrain: this.$store.state.terrain.map(row => row.map(item => item.id))
+            }),
+            date: this.getFormattedDate(new Date())
+          }
+          this.saveObjectsArray.push(saveObject)
+          this.$store.commit('saveNewState', { key: this.$store.getters.globalKey, value: this.saveObjectsArray })
+          this.name = ''
+          this.dataSave = ''
+        }
+      } else {
+        this.warningWindow = true
       }
     },
-    methods: {
-      takeСurrentName(names) {
-        this.currentName = names
-        this.name = names
-      },
-      getFormattedDate(date) {
-        return date.getFullYear() + '-' + (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : '' + (date.getMonth() + 1)) + '-' + (date.getDate() < 10 ? '0' + date.getDate() : '' + date.getDate()) + ' ' + (date.getHours() < 10 ? '0' + date.getHours() : '' + date.getHours()) + ':' + (date.getMinutes() < 10 ? '0' + date.getMinutes() : '' + date.getMinutes())
-      },
-      save() {
-        if (this.currentName === '') {
-          if (this.name !== '') {
-            let saveObject = {
-              id: this.name,
-              state: JSON.stringify(this.$store.state),
-              date: this.getFormattedDate(new Date())
-            }
-            this.saveObjectsArray.push(saveObject)
-            this.$store.commit('saveNewState', {key: this.$store.getters.globalKey, value: this.saveObjectsArray})
-            this.name = ''
-            this.dataSave = ''
+    reSave() {
+      for (var i = 0; i < this.saveObjectsArray.length; i++) {
+        if (this.saveObjectsArray[i].id === this.currentName) {
+          this.saveObjectsArray[i] = {
+            state: JSON.stringify({
+              characters: (() => {
+                let chs = []
+                const characters = this.$store.state.characters
+                const terrain = this.$store.state.terrain
+                terrain.forEach((row, x) => {
+                  chs.push([])
+                  row.forEach((element, y) => {
+                    let val = ' '
+                    for (let key in characters) {
+                      if (characters[key].x === x && characters[key].y === y) {
+                        val = characters[key].id
+                      }
+                    }
+                    chs[x].push(val)
+                  })
+                })
+                return chs
+              })(),
+              terrain: this.$store.state.terrain.map(row => row.map(item => item.id))
+            }),
+            id: this.name,
+            date: this.getFormattedDate(new Date())
           }
-        } else {
-          this.warningWindow = true
-        }
-      },
-      reSave() {
-        for (var i = 0; i < this.saveObjectsArray.length; i++) {
-          if (this.saveObjectsArray[i].id === this.currentName) {
-            this.saveObjectsArray[i] = {state: JSON.stringify(this.$store.state), id: this.name, date: this.getFormattedDate(new Date())}
-            this.$store.commit('saveNewState', {key: this.$store.getters.globalKey, value: this.saveObjectsArray})
-            this.name = ''
-            this.showResaveBtn = false
-            this.currentName = ''
-          }
-        }
-      },
-      remove(names) {
-        for (var i = 0; i < this.saveObjectsArray.length; i++) {
-          if (this.saveObjectsArray[i].id === names) {
-            this.saveObjectsArray.splice(i, 1)
-            this.$store.commit('saveNewState', {key: this.$store.getters.globalKey, value: this.saveObjectsArray})
-            break
-          }
+          this.$store.commit('saveNewState', { key: this.$store.getters.globalKey, value: this.saveObjectsArray })
+          this.name = ''
+          this.showResaveBtn = false
+          this.currentName = ''
         }
       }
     },
-    created() {
-      let saveArray = localStorage.getItem(this.$store.getters.globalKey)
-      if (saveArray) {
-        this.saveObjectsArray = JSON.parse(saveArray)
+    remove(names) {
+      for (var i = 0; i < this.saveObjectsArray.length; i++) {
+        if (this.saveObjectsArray[i].id === names) {
+          this.saveObjectsArray.splice(i, 1)
+          this.$store.commit('saveNewState', { key: this.$store.getters.globalKey, value: this.saveObjectsArray })
+          break
+        }
       }
     }
+  },
+  created() {
+    let saveArray = localStorage.getItem(this.$store.getters.globalKey)
+    if (saveArray) {
+      this.saveObjectsArray = JSON.parse(saveArray)
+    }
   }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

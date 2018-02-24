@@ -1,8 +1,8 @@
 <template>
   <div class="section">
    <h2 class="text-big text-gray">Maze Adventures</h2>
-   <div>
-      <router-link to="/game" class="button button-huge block-mobile">New Game</router-link>
+   <div @click="newGame">
+      <router-link to="/game" class="button button-huge block-mobile" >New Game</router-link>
    </div>
    <div>
       <router-link to="/save" class="button button-huge block-mobile">Save Game</router-link>
@@ -21,7 +21,12 @@
 
 <script>
 export default {
-  name: 'MainMenu'
+  name: 'MainMenu',
+  methods: {
+    newGame() {
+      return this.$store.dispatch('newGame')
+    }
+  }
 }
 </script>
 

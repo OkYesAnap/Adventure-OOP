@@ -1,6 +1,6 @@
 import { Item, PickableItem, CharWithInventory } from '../classes/main'
 import { Quest } from '../classes/Quest'
-const maps = {
+export const maps = {
   location01: [
     ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1'],
     ['1', ' ', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', ' ', '1', '5', ' ', ' ', '0', ' ', '1'],
@@ -46,33 +46,107 @@ const maps = {
     ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
   ]
 }
+export const charactersAtMap = {
+  location01chars: [
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', 'H', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', 'F', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'F', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', 'c', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'T', ' ', ' ', ' ', ' ', 'g', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+  ]
+}
 export const mapItemCreator = {
   ' ': coords => new Item(coords, ' ', ' ', ' ', { pickable: false }),
   '0': coords => new Item(coords, '0', 'tree', 'tree', { cantWalk: true }),
   '1': coords => new Item(coords, '1', 'wall', 'wall', { cantWalk: true }),
   '2': coords => new Item(coords, '2', 'monster', 'monster', { cantWalk: true }),
-  '4': coords => new PickableItem(coords, '4', 'Diamond', 'diamond', { pickable: true }, 50, 'They are known particularly for their use in jewelry, such as rings or necklaces'),
-  '5': coords => new PickableItem(coords, '5', 'Gold', 'gold', { pickable: true }, 5, 'Gold are extremely rich in important antioxidants, flavanoids, and dietary fiber'),
-  '6': coords => new PickableItem(coords, '6', 'Food', 'food', { pickable: true }, 1, 'You need only to view the movie Super Size Me to understand how foods impact the body')
+  '4': coords =>
+    new PickableItem(
+      coords,
+      '4',
+      'Diamond',
+      'diamond',
+      { pickable: true },
+      50,
+      'They are known particularly for their use in jewelry, such as rings or necklaces'
+    ),
+  '5': coords =>
+    new PickableItem(
+      coords,
+      '5',
+      'Gold',
+      'gold',
+      { pickable: true },
+      5,
+      'Gold are extremely rich in important antioxidants, flavanoids, and dietary fiber'
+    ),
+  '6': coords =>
+    new PickableItem(
+      coords,
+      '6',
+      'Food',
+      'food',
+      { pickable: true },
+      1,
+      'You need only to view the movie Super Size Me to understand how foods impact the body'
+    )
 }
 
-export const itemRetranslaton = arr =>
+export const itemRetranslaton = (arr, callback) =>
   arr.map((row, x) =>
     row.map((val, y) => {
-      return mapItemCreator[val]({ x: x, y: y })
+      return callback[val]({ x: x, y: y })
     })
   )
 
-export const mapItems = itemRetranslaton(maps.location01)
+export const mapItems = itemRetranslaton(maps.location01, mapItemCreator)
 
 const HEROIMG = 'https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_animation_by_hero_in_pixels.gif'
 const FREDDI = 'http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif'
-const GNOMEQUEST = 'http://3.bp.blogspot.com/-OgbmYzOUhnY/UYfrEjPnriI/AAAAAAAAAr8/lbOlb5AgBIc/s1600/AnimatedLeprechaunDancing.gif'
-const CATQUEST = 'http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif'
-const TREASURE = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5oEjh1sjyWsewELv83boE_EPLUKItNp5hndBtWSPE21QTUg_zng'
-const characterCreator = {
-  H: coords => new CharWithInventory(coords, 'H', 'Hero', HEROIMG, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
-  T: coords => new CharWithInventory(coords, 'T', 'treasure', TREASURE, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+const GNOMEQUEST =
+  'http://3.bp.blogspot.com/-OgbmYzOUhnY/UYfrEjPnriI/AAAAAAAAAr8/lbOlb5AgBIc/s1600/AnimatedLeprechaunDancing.gif'
+const CATQUEST =
+  'http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif'
+const TREASURE =
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5oEjh1sjyWsewELv83boE_EPLUKItNp5hndBtWSPE21QTUg_zng'
+export const characterCreator = {
+  H: coords =>
+    new CharWithInventory(
+      coords,
+      'H',
+      'Hero',
+      HEROIMG,
+      { walker: true, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  T: coords =>
+    new CharWithInventory(
+      coords,
+      'T',
+      'treasure',
+      TREASURE,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
   F: coords =>
     new CharWithInventory(
       coords,
@@ -177,14 +251,40 @@ const characterCreator = {
         start: 0
       },
       10
+    ),
+  e: coords =>
+    new CharWithInventory(
+      coords,
+      'H',
+      'Hero',
+      HEROIMG,
+      { walker: true, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
     )
 }
 export const currentNPC = null
-export const characters = {
-  hero: characterCreator['H']({ x: 1, y: 1 }),
-  Monster: characterCreator['F']({ x: 6, y: 4 }),
-  fred2: characterCreator['F']({ x: 9, y: 9 }),
-  catQuest: characterCreator['c']({ x: 14, y: 1 }),
-  gnomeQuest: characterCreator['g']({ x: 18, y: 13 }),
-  treasure: characterCreator['T']({ x: 18, y: 9 })
+export const charsRetranslaton = (arr, callback) => {
+  let characters = {}
+  arr.forEach((row, x) =>
+    row.forEach((val, y) => {
+      if (val === 'H') characters.hero = callback[val]({ x: x, y: y })
+      else if (val === 'c') characters.catQuest = callback[val]({ x: x, y: y })
+      else if (val === 'g') characters.gnomeQuest = callback[val]({ x: x, y: y })
+      else if (val === 'T') characters.treasure = callback[val]({ x: x, y: y })
+      else if (val !== ' ') characters[val + x + y] = callback[val]({ x: x, y: y })
+    })
+  )
+  return characters
 }
+export const characters = charsRetranslaton(charactersAtMap.location01chars, characterCreator)
+
+// {
+//   hero: characterCreator['H']({ x: 1, y: 1 }),
+//   Monster: characterCreator['F']({ x: 6, y: 4 }),
+//   fred2: characterCreator['F']({ x: 9, y: 9 }),
+//   catQuest: characterCreator['c']({ x: 14, y: 1 }),
+//   gnomeQuest: characterCreator['g']({ x: 18, y: 13 }),
+//   treasure: characterCreator['T']({ x: 18, y: 9 })
+// }

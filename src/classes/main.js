@@ -1,4 +1,4 @@
-import { itemRetranslaton } from '../maps/localMap'
+import { itemRetranslaton, mapItemCreator } from '../maps/localMap'
 
 export class Character {
   constructor(coords, id, name, img, interact, punch) {
@@ -28,13 +28,13 @@ export class CharWithInventory extends Character {
         inventory[x].push(' ')
       }
     }
-    inventory = itemRetranslaton(inventory)
+    inventory = itemRetranslaton(inventory, mapItemCreator)
     inventory = this.checkVolume(inventory)
     inventory.maxVolume = inv.maxVolume
     return inventory
   }
   retrans(inv) {
-    inv = itemRetranslaton(inv)
+    inv = itemRetranslaton(inv, mapItemCreator)
   }
   checkVolume(inv) {
     inv.volume = inv.reduce((vol, row) => {
@@ -53,7 +53,15 @@ export class CharWithInventory extends Character {
         if (arr[x][y].id === ' ') {
           item.x = x
           item.y = y
-          arr[x][y] = new PickableItem({ x: x, y: y }, item.id, item.name, item.cssclass, item.interact, item.weight, item.info)
+          arr[x][y] = new PickableItem(
+            { x: x, y: y },
+            item.id,
+            item.name,
+            item.cssclass,
+            item.interact,
+            item.weight,
+            item.info
+          )
           this.inventory = this.checkVolume(arr)
           this.inventory.maxVolume = arr.max
           return true

@@ -8,6 +8,7 @@ export const action = async ({ commit, state }, { x, y }) => {
     const targetItem = state.terrain[xLoc][yLoc]
     for (let i in characterTypes) {
       if (characterTypes[i].interact.isMonster && characterTypes[i].x === xLoc && characterTypes[i].y === yLoc) {
+        console.log('xxx', characterTypes)
         commit('fight', characterTypes[i])
       }
       if (characterTypes[i].interact.isQuestMonster && characterTypes[i].x === xLoc && characterTypes[i].y === yLoc) {
@@ -90,4 +91,7 @@ export const itemManager = async ({ commit, state }, { answer, itemFrom, itemTo,
   }
   if (update) commit('updateInventory', { char: update })
   commit('dialogCloser', { message: state.dialogMessage, answer: answer })
+}
+export const newGame = ({ commit, state }) => {
+  commit('newGame', { type: state })
 }
