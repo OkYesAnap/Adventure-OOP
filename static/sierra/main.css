@@ -53,10 +53,12 @@
   background-size: 100%;
 }
 .black {
-  background-color: #000000;
-  background-size: 100%;
+  background-image: url('https://png.pngtree.com/thumb_back/fw800/back_pic/04/12/80/01581c99ff2bc62.jpg');
+  background-color: #757575;
+  border: 1px solid black;
 }
 .white {
   background-color: #ffffff;
   background-size: 100%;
+  border: 1px solid black;
 }

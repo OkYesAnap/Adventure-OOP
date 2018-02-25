@@ -37,14 +37,16 @@ export const maps = {
     ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
   ],
   location03: [
-    ['b', 'w', 'b', 'w', 'b', 'w', 'b', 'w'],
-    ['w', 'b', 'w', 'b', 'w', 'b', 'w', 'b'],
-    ['b', 'w', 'b', 'w', 'b', 'w', 'b', 'w'],
-    ['w', 'b', 'w', 'b', 'w', 'b', 'w', 'b'],
-    ['b', 'w', 'b', 'w', 'b', 'w', 'b', 'w'],
-    ['w', 'b', 'w', 'b', 'w', 'b', 'w', 'b'],
-    ['b', 'w', 'b', 'w', 'b', 'w', 'b', 'w'],
-    ['w', 'b', 'w', 'b', 'w', 'b', 'w', 'b']
+    ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1'],
+    ['1', 'b', 'w', 'b', 'w', 'b', 'w', 'b', 'w', '1'],
+    ['1', 'w', 'b', 'w', 'b', 'w', 'b', 'w', 'b', '1'],
+    ['1', 'b', 'w', 'b', 'w', 'b', 'w', 'b', 'w', '1'],
+    ['1', 'w', 'b', 'w', 'b', 'w', 'b', 'w', 'b', '1'],
+    ['1', 'b', 'w', 'b', 'w', 'b', 'w', 'b', 'w', '1'],
+    ['1', 'w', 'b', 'w', 'b', 'w', 'b', 'w', 'b', '1'],
+    ['1', 'b', 'w', 'b', 'w', 'b', 'w', 'b', 'w', '1'],
+    ['1', 'w', 'b', 'w', 'b', 'w', 'b', 'w', 'b', '1'],
+    ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
   ]
 }
 export const charactersAtMap = {
@@ -72,35 +74,37 @@ export const charactersAtMap = {
   ],
   location02chars: [
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', 'UN', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', 'TR', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'TR', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', 'UN', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', 'TR', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', 'TR', ' ', ' '],
     [' ', 'GN', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
   ],
   location03chars: [
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    ['BP', 'BP', 'BP', 'BP', 'BP', 'BP', 'BP', 'BP'],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
-    ['WP', 'WP', 'WP', 'WP', 'WP', 'WP', 'WP', 'WP'],
-    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', 'BR', 'BH', 'BO', 'BK', 'BQ', 'BO', 'BH', 'BR', ' '],
+    [' ', 'BP', 'BP', 'BP', 'BP', 'BP', 'BP', 'BP', 'BP', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', 'WP', 'WP', 'WP', 'WP', 'WP', 'WP', 'WP', 'WP', ' '],
+    [' ', 'WR', 'WH', 'WO', 'WK', 'WQ', 'WO', 'WH', 'WR', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
   ]
 }
 export const mapItemCreator = {
-  ' ': coords => new Item(coords, ' ', ' ', ' ', { pickable: false }),
+  ' ': coords => new Item(coords, ' ', 'whit', 'whit', { pickable: false }),
   '0': coords => new Item(coords, '0', 'tree', 'tree', { cantWalk: true }),
   '1': coords => new Item(coords, '1', 'wall', 'wall', { cantWalk: true }),
   '2': coords => new Item(coords, '2', 'monster', 'monster', { cantWalk: true }),
-  b: coords => new Item(coords, 'b', 'black', 'black', { cantWalk: false }),
-  w: coords => new Item(coords, 'w', 'white', 'white', { cantWalk: false }),
+  b: coords => new Item(coords, 'b', 'black', 'black', { pickable: false }),
+  w: coords => new Item(coords, 'w', 'white', 'white', { pickable: false }),
   '4': coords =>
     new PickableItem(
       coords,
@@ -133,6 +137,13 @@ export const mapItemCreator = {
     )
 }
 
+export const itemRetranslaton = (arr, callback) =>
+  arr.map((row, x) =>
+    row.map((val, y) => {
+      return callback[val]({ x: x, y: y })
+    })
+  )
+
 const HEROIMG = 'https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_animation_by_hero_in_pixels.gif'
 const FREDDI = 'http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif'
 const GNOMEQUEST =
@@ -144,7 +155,6 @@ const TREASURE =
 const GNOME = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/gnome.png?raw=true'
 const TRENT = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/trent.png?raw=true'
 const UNICORN = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/unicorn.png?raw=true'
-const GNOME = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/gnome.png?raw=true'
 const wpawn = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wpawn.png?raw=true'
 const bpawn = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bpawn.png?raw=true'
 const wrook = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wrook.png?raw=true'
@@ -152,7 +162,7 @@ const brook = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/br
 const whose = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/whose.png?raw=true'
 const bhose = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bhose.png?raw=true'
 const wofficer = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wofficer.png?raw=true'
-const bofficer = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bofficer.png?raw=true'
+const bofficer = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bwofficer.png?raw=true'
 const wqueen = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wqueen.png?raw=true'
 const bqueen = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bqueen.png?raw=true'
 const wking = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wking.png?raw=true'
@@ -181,11 +191,33 @@ export const characterCreator = {
       null,
       10
     ),
+  TR: coords =>
+    new CharWithInventory(
+      coords,
+      'TR',
+      'Trent',
+      TRENT,
+      { walker: true, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  UN: coords =>
+    new CharWithInventory(
+      coords,
+      'UN',
+      'Unicorn',
+      UNICORN,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
   WP: coords =>
     new CharWithInventory(
       coords,
       'WP',
-      'Pawn',
+      'WHITE PAWN',
       wpawn,
       { walker: true, isMonster: false },
       { invHeight: 5, invWidth: 5, maxVolume: 100 },
@@ -196,9 +228,119 @@ export const characterCreator = {
     new CharWithInventory(
       coords,
       'WP',
-      'Pawn',
+      'BLACK PAWN',
       bpawn,
       { walker: true, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  WR: coords =>
+    new CharWithInventory(
+      coords,
+      'WR',
+      'WHITE ROOK',
+      wrook,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  BR: coords =>
+    new CharWithInventory(
+      coords,
+      'BR',
+      'BLACK ROOK',
+      brook,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  WH: coords =>
+    new CharWithInventory(
+      coords,
+      'WH',
+      'WHITE HOSE',
+      whose,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  BH: coords =>
+    new CharWithInventory(
+      coords,
+      'BH',
+      'BLACK HOSE',
+      bhose,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  WO: coords =>
+    new CharWithInventory(
+      coords,
+      'WO',
+      'WHITE OFFICER',
+      wofficer,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  BO: coords =>
+    new CharWithInventory(
+      coords,
+      'BO',
+      'BLACK OFFICER',
+      bofficer,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  WQ: coords =>
+    new CharWithInventory(
+      coords,
+      'WQ',
+      'WHITE QUEEN',
+      wqueen,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  BQ: coords =>
+    new CharWithInventory(
+      coords,
+      'BQ',
+      'BLACK QUEEN',
+      bqueen,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  WK: coords =>
+    new CharWithInventory(
+      coords,
+      'WQ',
+      'WHITE KING',
+      wking,
+      { walker: false, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  BK: coords =>
+    new CharWithInventory(
+      coords,
+      'BQ',
+      'BLACK KING',
+      bking,
+      { walker: false, isMonster: false },
       { invHeight: 5, invWidth: 5, maxVolume: 100 },
       null,
       10
@@ -345,16 +487,8 @@ export const charsRetranslaton = (arr, callback) => {
   )
   return characters
 }
-export const characters = charsRetranslaton(charactersAtMap.location01chars, characterCreator)
-
-export const itemRetranslaton = (arr, callback) =>
-  arr.map((row, x) =>
-    row.map((val, y) => {
-      return callback[val]({ x: x, y: y })
-    })
-  )
-
-export const mapItems = itemRetranslaton(maps.location01, mapItemCreator)
+export const characters = charsRetranslaton(charactersAtMap.location02chars, characterCreator)
+export const mapItems = itemRetranslaton(maps.location02, mapItemCreator)
 // {
 //   hero: characterCreator['H']({ x: 1, y: 1 }),
 //   Monster: characterCreator['F']({ x: 6, y: 4 }),
