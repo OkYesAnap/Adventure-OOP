@@ -1,8 +1,8 @@
 import { mapItems, characters, currentNPC } from '../maps/localMap'
 export default function() {
   return {
-    characters: characters,
     terrain: mapItems,
+    characters: characters,
     currentNPC: currentNPC,
     dialogMessage: { show: false },
     modalWindow: {

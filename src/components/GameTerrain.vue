@@ -1,6 +1,6 @@
 <template>
         <div class="t-wrapper">
-          <div @click="randomWalk">Go go go</div>
+          <div><span @click="randomWalk">Go go go-------------</span><span @click="ter1">---------ter1------</span><span @click="ter2">ter2</span></div>
             <div v-for="(row, x) in drawMap" :key="x" class="t-row">
                 <div v-for="(val, y) in row" :key="x+y" :class="val.cssclass" class="t-item" v-if="val.x===x && val.y===y">
                 <div v-if="characterDrawer(x, y)">
@@ -16,8 +16,7 @@ import mainEvent from '../eventListeners/mainEvent'
 export default {
   data: function() {
     return {
-      ev: mainEvent.bind(this),
-      char: this.$store.state.characters
+      ev: mainEvent.bind(this)
     }
   },
   created: function() {
@@ -30,7 +29,7 @@ export default {
     drawMap() {
       return this.$store.state.terrain
     },
-    characters() {
+    char() {
       return this.$store.state.characters
     }
   },
@@ -59,7 +58,13 @@ export default {
         this.ev(move)
         move.keyCode = 13
         this.ev(move)
-      }, 100)
+      }, 500)
+    },
+    ter1() {
+      this.$store.commit('ter1')
+    },
+    ter2() {
+      this.$store.commit('ter2')
     }
   }
 }

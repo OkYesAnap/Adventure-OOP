@@ -111,3 +111,12 @@ export const newGame = (state, { type }) => {
   state.characters = charsRetranslaton(charactersAtMap.location01chars, characterCreator)
   state.terrain = itemRetranslaton(maps.location01, mapItemCreator)
 }
+
+export const ter1 = state => {
+  state.terrain = itemRetranslaton(maps.location02, mapItemCreator)
+  state.characters = charsRetranslaton(charactersAtMap.location02chars, characterCreator)
+}
+export const ter2 = state => {
+  state.terrain = itemRetranslaton(maps.location03, mapItemCreator)
+  state.characters = charsRetranslaton(charactersAtMap.location03chars, characterCreator)
+}

@@ -487,8 +487,8 @@ export const charsRetranslaton = (arr, callback) => {
   )
   return characters
 }
-export const characters = charsRetranslaton(charactersAtMap.location02chars, characterCreator)
-export const mapItems = itemRetranslaton(maps.location02, mapItemCreator)
+export const characters = charsRetranslaton(charactersAtMap.location01chars, characterCreator)
+export const mapItems = itemRetranslaton(maps.location01, mapItemCreator)
 // {
 //   hero: characterCreator['H']({ x: 1, y: 1 }),
 //   Monster: characterCreator['F']({ x: 6, y: 4 }),
