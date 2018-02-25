@@ -35,6 +35,16 @@ export const maps = {
     ['1', ' ', ' ', ' ', ' ', '0', ' ', ' ', ' ', '1'],
     ['1', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', '1'],
     ['1', '1', '1', '1', '1', '1', '1', '1', '1', '1']
+  ],
+  location03: [
+    ['b', 'w', 'b', 'w', 'b', 'w', 'b', 'w'],
+    ['w', 'b', 'w', 'b', 'w', 'b', 'w', 'b'],
+    ['b', 'w', 'b', 'w', 'b', 'w', 'b', 'w'],
+    ['w', 'b', 'w', 'b', 'w', 'b', 'w', 'b'],
+    ['b', 'w', 'b', 'w', 'b', 'w', 'b', 'w'],
+    ['w', 'b', 'w', 'b', 'w', 'b', 'w', 'b'],
+    ['b', 'w', 'b', 'w', 'b', 'w', 'b', 'w'],
+    ['w', 'b', 'w', 'b', 'w', 'b', 'w', 'b']
   ]
 }
 export const charactersAtMap = {
@@ -72,6 +82,16 @@ export const charactersAtMap = {
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', 'GN', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
     [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
+  ],
+  location03chars: [
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    ['BP', 'BP', 'BP', 'BP', 'BP', 'BP', 'BP', 'BP'],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    ['WP', 'WP', 'WP', 'WP', 'WP', 'WP', 'WP', 'WP'],
+    [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
   ]
 }
 export const mapItemCreator = {
@@ -79,6 +99,8 @@ export const mapItemCreator = {
   '0': coords => new Item(coords, '0', 'tree', 'tree', { cantWalk: true }),
   '1': coords => new Item(coords, '1', 'wall', 'wall', { cantWalk: true }),
   '2': coords => new Item(coords, '2', 'monster', 'monster', { cantWalk: true }),
+  b: coords => new Item(coords, 'b', 'black', 'black', { cantWalk: false }),
+  w: coords => new Item(coords, 'w', 'white', 'white', { cantWalk: false }),
   '4': coords =>
     new PickableItem(
       coords,
@@ -111,15 +133,6 @@ export const mapItemCreator = {
     )
 }
 
-export const itemRetranslaton = (arr, callback) =>
-  arr.map((row, x) =>
-    row.map((val, y) => {
-      return callback[val]({ x: x, y: y })
-    })
-  )
-
-export const mapItems = itemRetranslaton(maps.location01, mapItemCreator)
-
 const HEROIMG = 'https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_animation_by_hero_in_pixels.gif'
 const FREDDI = 'http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif'
 const GNOMEQUEST =
@@ -129,6 +142,22 @@ const CATQUEST =
 const TREASURE =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5oEjh1sjyWsewELv83boE_EPLUKItNp5hndBtWSPE21QTUg_zng'
 const GNOME = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/gnome.png?raw=true'
+const TRENT = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/trent.png?raw=true'
+const UNICORN = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/unicorn.png?raw=true'
+const GNOME = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/gnome.png?raw=true'
+const wpawn = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wpawn.png?raw=true'
+const bpawn = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bpawn.png?raw=true'
+const wrook = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wrook.png?raw=true'
+const brook = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/brook.png?raw=true'
+const whose = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/whose.png?raw=true'
+const bhose = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bhose.png?raw=true'
+const wofficer = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wofficer.png?raw=true'
+const bofficer = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bofficer.png?raw=true'
+const wqueen = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wqueen.png?raw=true'
+const bqueen = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bqueen.png?raw=true'
+const wking = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wking.png?raw=true'
+const bking = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bking.png?raw=true'
+
 export const characterCreator = {
   GN: coords =>
     new CharWithInventory(
@@ -147,6 +176,28 @@ export const characterCreator = {
       'H',
       'Hero',
       HEROIMG,
+      { walker: true, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  WP: coords =>
+    new CharWithInventory(
+      coords,
+      'WP',
+      'Pawn',
+      wpawn,
+      { walker: true, isMonster: false },
+      { invHeight: 5, invWidth: 5, maxVolume: 100 },
+      null,
+      10
+    ),
+  BP: coords =>
+    new CharWithInventory(
+      coords,
+      'WP',
+      'Pawn',
+      bpawn,
       { walker: true, isMonster: false },
       { invHeight: 5, invWidth: 5, maxVolume: 100 },
       null,
@@ -296,6 +347,14 @@ export const charsRetranslaton = (arr, callback) => {
 }
 export const characters = charsRetranslaton(charactersAtMap.location01chars, characterCreator)
 
+export const itemRetranslaton = (arr, callback) =>
+  arr.map((row, x) =>
+    row.map((val, y) => {
+      return callback[val]({ x: x, y: y })
+    })
+  )
+
+export const mapItems = itemRetranslaton(maps.location01, mapItemCreator)
 // {
 //   hero: characterCreator['H']({ x: 1, y: 1 }),
 //   Monster: characterCreator['F']({ x: 6, y: 4 }),
