@@ -128,7 +128,7 @@ const CATQUEST =
   'http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif'
 const TREASURE =
   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5oEjh1sjyWsewELv83boE_EPLUKItNp5hndBtWSPE21QTUg_zng'
-const GNOME = '../img/gnome.png'
+const GNOME = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/gnome.png?raw=true'
 export const characterCreator = {
   GN: coords =>
     new CharWithInventory(
@@ -294,7 +294,7 @@ export const charsRetranslaton = (arr, callback) => {
   )
   return characters
 }
-export const characters = charsRetranslaton(charactersAtMap.location02chars, characterCreator)
+export const characters = charsRetranslaton(charactersAtMap.location01chars, characterCreator)
 
 // {
 //   hero: characterCreator['H']({ x: 1, y: 1 }),
