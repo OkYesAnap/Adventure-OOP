@@ -9,6 +9,7 @@ export default function() {
     modalWindow: {
       opening: false,
       info: ''
-    }
+    },
+    winGame: false
   }
 }
