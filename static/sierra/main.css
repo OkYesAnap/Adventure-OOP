@@ -53,11 +53,12 @@
   background-size: 100%;
 }
 .black {
-  background-image: url('https://png.pngtree.com/thumb_back/fw800/back_pic/04/12/80/01581c99ff2bc62.jpg');
+  background-image: url('https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/black.jpg?raw=true');
   background-color: #757575;
   border: 1px solid black;
 }
 .white {
+  background-image: url('https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/white.jpg?raw=true');
   background-color: #ffffff;
   background-size: 100%;
   border: 1px solid black;

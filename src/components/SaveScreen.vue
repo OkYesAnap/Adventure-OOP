@@ -15,7 +15,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for='names in saveObjectsArray' @click='takeСurrentName(names.id), showResaveBtn = !showResaveBtn'>
+          <tr v-for='(names, x) in saveObjectsArray' :key='names+x' @click='takeСurrentName(names.id), showResaveBtn = !showResaveBtn'>
             <td>{{names.id}}</td>
             <td>{{names.date}} </td>
             <td><button class="button button-red button-small block-mobile remove-btn" @click="remove(names.id)">remove</button>
@@ -73,6 +73,7 @@ export default {
             state: JSON.stringify({
               characters: (() => {
                 let chs = []
+                let inventory = []
                 const characters = this.$store.state.characters
                 const terrain = this.$store.state.terrain
                 terrain.forEach((row, x) => {
@@ -82,9 +83,10 @@ export default {
                     for (let key in characters) {
                       if (characters[key].x === x && characters[key].y === y) {
                         val = characters[key].id
+                        inventory = characters[key].inventory.map(row => row.map(val => val.id))
                       }
                     }
-                    chs[x].push(val)
+                    chs[x].push([val, inventory])
                   })
                 })
                 return chs
@@ -109,6 +111,7 @@ export default {
             state: JSON.stringify({
               characters: (() => {
                 let chs = []
+                let inventory = []
                 const characters = this.$store.state.characters
                 const terrain = this.$store.state.terrain
                 terrain.forEach((row, x) => {
@@ -118,9 +121,10 @@ export default {
                     for (let key in characters) {
                       if (characters[key].x === x && characters[key].y === y) {
                         val = characters[key].id
+                        inventory = characters[key].inventory.map(row => row.map(val => val.id))
                       }
                     }
-                    chs[x].push(val)
+                    chs[x].push([val, inventory])
                   })
                 })
                 return chs

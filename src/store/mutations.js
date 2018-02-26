@@ -1,11 +1,4 @@
-import {
-  mapItemCreator,
-  maps,
-  charactersAtMap,
-  charsRetranslaton,
-  itemRetranslaton,
-  characterCreator
-} from '../maps/localMap'
+import { mapItemCreator, maps, charactersAtMap, charsRetranslaton, itemRetranslaton, characterCreator } from '../maps/localMap'
 export const move = (state, { type, xy }) => {
   type.x = xy.x
   type.y = xy.y
@@ -50,10 +43,10 @@ export const updateInventory = (state, { char }) => {
   }
 }
 export const saveNewState = (state, { key, value }) => {
-  console.log(value)
   localStorage.setItem(key, JSON.stringify(value))
 }
 export const loaderGame = (state, { loadedGame }) => {
+  console.log(JSON.parse(loadedGame).characters)
   state.characters = charsRetranslaton(JSON.parse(loadedGame).characters, characterCreator)
   state.terrain = itemRetranslaton(JSON.parse(loadedGame).terrain, mapItemCreator)
 }
