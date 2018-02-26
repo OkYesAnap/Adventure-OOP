@@ -48,6 +48,7 @@ export const saveNewState = (state, { key, value }) => {
 export const loaderGame = (state, { loadedGame }) => {
   state.characters = charsRetranslaton(JSON.parse(loadedGame).characters, characterCreator)
   state.terrain = itemRetranslaton(JSON.parse(loadedGame).terrain, mapItemCreator)
+  state.startGame = true
 }
 export const fight = (state, monster) => {
   state.currentNPC = monster
