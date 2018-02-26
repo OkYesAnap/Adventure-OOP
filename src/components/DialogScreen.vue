@@ -1,6 +1,6 @@
 <template>
   <div class="dialog">
-     <div>{{message.arror }}</div>
+
     <h2> {{ message.cssclass}}</h2>
       {{ message.msg }}
       <div class="picture" v-if="message.cssclass" :class="message.cssclass"></div>
@@ -8,7 +8,7 @@
       <div class="aligner-space-around" ref="btn">
           <button v-for="btns in message.buttons" class="button block-mobile" :key="btns" @click="answer(btns, message)">{{ btns }}</button>
       </div>
-      <div>{{message.arror }}</div>
+
   </div>
 </template>
 <script>

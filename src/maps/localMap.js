@@ -253,7 +253,7 @@ export const characterCreator = {
           msg: 'This is not the right answer'
         },
         5: {
-          msg: 'You win! Now i will give you key',
+          msg: 'You win! I give you hint. You need go to a gnome and get treasure',
           prize: '*'
         },
         food: 0,

@@ -56,5 +56,6 @@ export default {
   margin-left: -300px;
   padding: 20px;
   background-color: #2c3e50;
+  border: 10px solid #18232f;
 }
 </style>

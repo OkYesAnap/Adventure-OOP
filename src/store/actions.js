@@ -15,9 +15,6 @@ export const action = async ({ commit, state }, { x, y }) => {
           commit('getStartTalk', state.characters[characterTypes[i].name].startingTalk(state, characterTypes[i]))
         } else {
           commit('getStartTalkGnome', state.characters[characterTypes[i].name].startingTalk(state, character))
-          // if (characterTypes[i].dialog.start === 3) {
-          //   commit('getTreasure')
-          // }
         }
         // ////////
       }
@@ -93,4 +90,7 @@ export const itemManager = async ({ commit, state }, { answer, itemFrom, itemTo,
 }
 export const newGame = ({ commit, state }) => {
   commit('newGame', { type: state })
+}
+export const openPopupMainMenu = ({ commit, state }, message) => {
+  commit('openPopupMainMenu', message)
 }
