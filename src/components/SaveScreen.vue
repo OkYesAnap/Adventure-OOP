@@ -73,14 +73,15 @@ export default {
             state: JSON.stringify({
               characters: (() => {
                 let chs = []
-                let inventory = []
-                let img = ''
-                let status = 0
                 const characters = this.$store.state.characters
                 const terrain = this.$store.state.terrain
                 terrain.forEach((row, x) => {
                   chs.push([])
                   row.forEach((element, y) => {
+                    let inventory = []
+                    let img = ''
+                    let status = 0
+                    let start = 0
                     let val = ' '
                     for (let key in characters) {
                       if (characters[key].x === x && characters[key].y === y) {
@@ -88,11 +89,13 @@ export default {
                         inventory = characters[key].inventory.map(row => row.map(val => val.id))
                         img = characters[key].img
                         status = characters[key].status
+                        if (characters[key].dialog) start = characters[key].dialog.start
                       }
                     }
-                    chs[x].push([val, inventory, img, status])
+                    chs[x].push([val, inventory, img, status, start])
                   })
                 })
+                console.log(chs)
                 return chs
               })(),
               terrain: this.$store.state.terrain.map(row => row.map(item => item.id))
@@ -118,6 +121,7 @@ export default {
                 let inventory = []
                 let img = ''
                 let status = 0
+                let start = 0
                 const characters = this.$store.state.characters
                 const terrain = this.$store.state.terrain
                 terrain.forEach((row, x) => {
@@ -130,11 +134,13 @@ export default {
                         inventory = characters[key].inventory.map(row => row.map(val => val.id))
                         img = characters[key].img
                         status = characters[key].status
+                        start = characters[key].start
                       }
                     }
-                    chs[x].push([val, inventory, img, status])
+                    chs[x].push([val, inventory, img, status, start])
                   })
                 })
+                console.log(chs)
                 return chs
               })(),
               terrain: this.$store.state.terrain.map(row => row.map(item => item.id))
