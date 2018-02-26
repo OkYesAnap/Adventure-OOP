@@ -7,6 +7,7 @@
         <GameTerrain></GameTerrain>
         <PopupWindow v-show="this.$store.getters.OpeningClosePopup.opening"></PopupWindow>
         <Fight-window v-if="this.$store.state.currentNPC != null && this.$store.state.currentNPC.status !== -1"/>
+        <div v-show="update"></div>
       </div>
     </div>
     <div class="invent">
@@ -85,6 +86,12 @@ export default {
     },
     fightWindow: function() {
       return this.$store.state.currentNPC != null
+    },
+    update: function() {
+      if (this.$store.getters.winner) {
+        this.$router.push({ name: 'DevelopersScreen' })
+        this.$store.dispatch('endingGame')
+      }
     }
   }
 }
