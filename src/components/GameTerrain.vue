@@ -21,6 +21,7 @@ export default {
   },
   created: function() {
     window.addEventListener('keydown', this.ev)
+    if (!this.$store.state.startGame) this.$router.push({ name: 'MainMenu' })
   },
   beforeDestroy: function() {
     window.removeEventListener('keydown', this.ev)
