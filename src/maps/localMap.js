@@ -278,13 +278,27 @@ export const charsRetranslaton = (arr, callback) => {
           if (val[0] === 'H') {
             val[1].forEach(row => row.forEach(val => characters.hero.addItem(itemRetranslaton([[val]], mapItemCreator)[0][0])))
           }
+          if (val[2] !== '') {
+            console.log(val[2])
+
+            if (val[0] === 'H') characters.hero.img = val[2]
+            else if (val[0] === 'c') characters.catQuest.img = val[2]
+            else if (val[0] === 'g') characters.gnomeQuest.img = val[2]
+            else if (val[0] === 'T') characters.treasure.img = val[2]
+            else if (val[0] !== ' ') {
+              if (val[3] === -1) characters[val[0] + x + y].status = val[3]
+              characters[val[0] + x + y].img = val[2]
+            }
+          }
         }
       } else {
         if (val === 'H') characters.hero = callback[val]({ x: x, y: y })
         else if (val === 'c') characters.catQuest = callback[val]({ x: x, y: y })
         else if (val === 'g') characters.gnomeQuest = callback[val]({ x: x, y: y })
         else if (val === 'T') characters.treasure = callback[val]({ x: x, y: y })
-        else if (val !== ' ') characters[val + x + y] = callback[val]({ x: x, y: y })
+        else if (val !== ' ') {
+          characters[val + x + y] = callback[val]({ x: x, y: y })
+        }
       }
     })
   )

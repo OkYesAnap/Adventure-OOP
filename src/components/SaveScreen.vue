@@ -74,6 +74,8 @@ export default {
               characters: (() => {
                 let chs = []
                 let inventory = []
+                let img = ''
+                let status = 0
                 const characters = this.$store.state.characters
                 const terrain = this.$store.state.terrain
                 terrain.forEach((row, x) => {
@@ -84,9 +86,11 @@ export default {
                       if (characters[key].x === x && characters[key].y === y) {
                         val = characters[key].id
                         inventory = characters[key].inventory.map(row => row.map(val => val.id))
+                        img = characters[key].img
+                        status = characters[key].status
                       }
                     }
-                    chs[x].push([val, inventory])
+                    chs[x].push([val, inventory, img, status])
                   })
                 })
                 return chs
@@ -112,6 +116,7 @@ export default {
               characters: (() => {
                 let chs = []
                 let inventory = []
+                let img = ''
                 const characters = this.$store.state.characters
                 const terrain = this.$store.state.terrain
                 terrain.forEach((row, x) => {
@@ -122,9 +127,11 @@ export default {
                       if (characters[key].x === x && characters[key].y === y) {
                         val = characters[key].id
                         inventory = characters[key].inventory.map(row => row.map(val => val.id))
+                        img = characters[key].img
+                        console.log(characters[key].img)
                       }
                     }
-                    chs[x].push([val, inventory])
+                    chs[x].push([val, inventory, img])
                   })
                 })
                 return chs

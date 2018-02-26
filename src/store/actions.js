@@ -8,7 +8,6 @@ export const action = async ({ commit, state }, { x, y }) => {
     const targetItem = state.terrain[xLoc][yLoc]
     for (let i in characterTypes) {
       if (characterTypes[i].interact.isMonster && characterTypes[i].x === xLoc && characterTypes[i].y === yLoc) {
-        console.log('xxx', characterTypes)
         commit('fight', characterTypes[i])
       }
       if (characterTypes[i].interact.isQuestMonster && characterTypes[i].x === xLoc && characterTypes[i].y === yLoc) {
