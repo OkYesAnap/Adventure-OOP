@@ -46,7 +46,6 @@ export const saveNewState = (state, { key, value }) => {
   localStorage.setItem(key, JSON.stringify(value))
 }
 export const loaderGame = (state, { loadedGame }) => {
-  console.log(JSON.parse(loadedGame).characters)
   state.characters = charsRetranslaton(JSON.parse(loadedGame).characters, characterCreator)
   state.terrain = itemRetranslaton(JSON.parse(loadedGame).terrain, mapItemCreator)
 }

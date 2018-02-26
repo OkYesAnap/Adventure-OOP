@@ -279,8 +279,6 @@ export const charsRetranslaton = (arr, callback) => {
             val[1].forEach(row => row.forEach(val => characters.hero.addItem(itemRetranslaton([[val]], mapItemCreator)[0][0])))
           }
           if (val[2] !== '') {
-            console.log(val[2])
-
             if (val[0] === 'H') characters.hero.img = val[2]
             else if (val[0] === 'c') characters.catQuest.img = val[2]
             else if (val[0] === 'g') characters.gnomeQuest.img = val[2]
