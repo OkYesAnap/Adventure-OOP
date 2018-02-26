@@ -105,36 +105,9 @@ export const mapItemCreator = {
   '2': coords => new Item(coords, '2', 'monster', 'monster', { cantWalk: true }),
   b: coords => new Item(coords, 'b', 'black', 'black', { pickable: false }),
   w: coords => new Item(coords, 'w', 'white', 'white', { pickable: false }),
-  '4': coords =>
-    new PickableItem(
-      coords,
-      '4',
-      'Diamond',
-      'diamond',
-      { pickable: true },
-      50,
-      'They are known particularly for their use in jewelry, such as rings or necklaces'
-    ),
-  '5': coords =>
-    new PickableItem(
-      coords,
-      '5',
-      'Gold',
-      'gold',
-      { pickable: true },
-      5,
-      'Gold are extremely rich in important antioxidants, flavanoids, and dietary fiber'
-    ),
-  '6': coords =>
-    new PickableItem(
-      coords,
-      '6',
-      'Food',
-      'food',
-      { pickable: true },
-      1,
-      'You need only to view the movie Super Size Me to understand how foods impact the body'
-    )
+  '4': coords => new PickableItem(coords, '4', 'Diamond', 'diamond', { pickable: true }, 50, 'They are known particularly for their use in jewelry, such as rings or necklaces'),
+  '5': coords => new PickableItem(coords, '5', 'Gold', 'gold', { pickable: true }, 5, 'Gold are extremely rich in important antioxidants, flavanoids, and dietary fiber'),
+  '6': coords => new PickableItem(coords, '6', 'Food', 'food', { pickable: true }, 1, 'You need only to view the movie Super Size Me to understand how foods impact the body')
 }
 
 export const itemRetranslaton = (arr, callback) =>
@@ -146,12 +119,9 @@ export const itemRetranslaton = (arr, callback) =>
 
 const HEROIMG = 'https://orig00.deviantart.net/e0b9/f/2010/234/2/8/west_dash_animation_by_hero_in_pixels.gif'
 const FREDDI = 'http://www.fright-bytes.com/scary-halloween-animations/monsters/monster1b.gif'
-const GNOMEQUEST =
-  'http://3.bp.blogspot.com/-OgbmYzOUhnY/UYfrEjPnriI/AAAAAAAAAr8/lbOlb5AgBIc/s1600/AnimatedLeprechaunDancing.gif'
-const CATQUEST =
-  'http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif'
-const TREASURE =
-  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5oEjh1sjyWsewELv83boE_EPLUKItNp5hndBtWSPE21QTUg_zng'
+const GNOMEQUEST = 'http://3.bp.blogspot.com/-OgbmYzOUhnY/UYfrEjPnriI/AAAAAAAAAr8/lbOlb5AgBIc/s1600/AnimatedLeprechaunDancing.gif'
+const CATQUEST = 'http://www.gifmania.ru/Animated-Gifs-Walt-Disney/Animations-Disney-Movies/Images-Alice-in-Wonderland/Cheshire-Cat/Cheshire-Cat-86017.gif'
+const TREASURE = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5oEjh1sjyWsewELv83boE_EPLUKItNp5hndBtWSPE21QTUg_zng'
 const GNOME = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/gnome.png?raw=true'
 const TRENT = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/trent.png?raw=true'
 const UNICORN = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/unicorn.png?raw=true'
@@ -169,193 +139,23 @@ const wking = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/wk
 const bking = 'https://github.com/OkYesAnap/Adventure-OOP/blob/master/src/img/bking.png?raw=true'
 
 export const characterCreator = {
-  GN: coords =>
-    new CharWithInventory(
-      coords,
-      'GN',
-      'gnome',
-      GNOME,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  H: coords =>
-    new CharWithInventory(
-      coords,
-      'H',
-      'Hero',
-      HEROIMG,
-      { walker: true, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  TR: coords =>
-    new CharWithInventory(
-      coords,
-      'TR',
-      'Trent',
-      TRENT,
-      { walker: true, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  UN: coords =>
-    new CharWithInventory(
-      coords,
-      'UN',
-      'Unicorn',
-      UNICORN,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  WP: coords =>
-    new CharWithInventory(
-      coords,
-      'WP',
-      'WHITE PAWN',
-      wpawn,
-      { walker: true, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  BP: coords =>
-    new CharWithInventory(
-      coords,
-      'WP',
-      'BLACK PAWN',
-      bpawn,
-      { walker: true, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  WR: coords =>
-    new CharWithInventory(
-      coords,
-      'WR',
-      'WHITE ROOK',
-      wrook,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  BR: coords =>
-    new CharWithInventory(
-      coords,
-      'BR',
-      'BLACK ROOK',
-      brook,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  WH: coords =>
-    new CharWithInventory(
-      coords,
-      'WH',
-      'WHITE HOSE',
-      whose,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  BH: coords =>
-    new CharWithInventory(
-      coords,
-      'BH',
-      'BLACK HOSE',
-      bhose,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  WO: coords =>
-    new CharWithInventory(
-      coords,
-      'WO',
-      'WHITE OFFICER',
-      wofficer,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  BO: coords =>
-    new CharWithInventory(
-      coords,
-      'BO',
-      'BLACK OFFICER',
-      bofficer,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  WQ: coords =>
-    new CharWithInventory(
-      coords,
-      'WQ',
-      'WHITE QUEEN',
-      wqueen,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  BQ: coords =>
-    new CharWithInventory(
-      coords,
-      'BQ',
-      'BLACK QUEEN',
-      bqueen,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  WK: coords =>
-    new CharWithInventory(
-      coords,
-      'WQ',
-      'WHITE KING',
-      wking,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  BK: coords =>
-    new CharWithInventory(
-      coords,
-      'BQ',
-      'BLACK KING',
-      bking,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
-  T: coords =>
-    new CharWithInventory(
-      coords,
-      'T',
-      'treasure',
-      TREASURE,
-      { walker: false, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    ),
+  GN: coords => new CharWithInventory(coords, 'GN', 'gnome', GNOME, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  H: coords => new CharWithInventory(coords, 'H', 'Hero', HEROIMG, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  TR: coords => new CharWithInventory(coords, 'TR', 'Trent', TRENT, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  UN: coords => new CharWithInventory(coords, 'UN', 'Unicorn', UNICORN, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  WP: coords => new CharWithInventory(coords, 'WP', 'WHITE PAWN', wpawn, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  BP: coords => new CharWithInventory(coords, 'WP', 'BLACK PAWN', bpawn, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  WR: coords => new CharWithInventory(coords, 'WR', 'WHITE ROOK', wrook, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  BR: coords => new CharWithInventory(coords, 'BR', 'BLACK ROOK', brook, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  WH: coords => new CharWithInventory(coords, 'WH', 'WHITE HOSE', whose, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  BH: coords => new CharWithInventory(coords, 'BH', 'BLACK HOSE', bhose, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  WO: coords => new CharWithInventory(coords, 'WO', 'WHITE OFFICER', wofficer, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  BO: coords => new CharWithInventory(coords, 'BO', 'BLACK OFFICER', bofficer, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  WQ: coords => new CharWithInventory(coords, 'WQ', 'WHITE QUEEN', wqueen, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  BQ: coords => new CharWithInventory(coords, 'BQ', 'BLACK QUEEN', bqueen, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  WK: coords => new CharWithInventory(coords, 'WQ', 'WHITE KING', wking, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  BK: coords => new CharWithInventory(coords, 'BQ', 'BLACK KING', bking, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  T: coords => new CharWithInventory(coords, 'T', 'treasure', TREASURE, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
   F: coords =>
     new CharWithInventory(
       coords,
@@ -453,7 +253,7 @@ export const characterCreator = {
           msg: 'This is not the right answer'
         },
         5: {
-          msg: 'You win! Now i will give you key',
+          msg: 'You win! I give you hint. You need go to a gnome and get treasure',
           prize: '*'
         },
         food: 0,
@@ -461,17 +261,7 @@ export const characterCreator = {
       },
       10
     ),
-  e: coords =>
-    new CharWithInventory(
-      coords,
-      'H',
-      'Hero',
-      HEROIMG,
-      { walker: true, isMonster: false },
-      { invHeight: 5, invWidth: 5, maxVolume: 100 },
-      null,
-      10
-    )
+  e: coords => new CharWithInventory(coords, 'H', 'Hero', HEROIMG, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10)
 }
 export const currentNPC = null
 export const charsRetranslaton = (arr, callback) => {

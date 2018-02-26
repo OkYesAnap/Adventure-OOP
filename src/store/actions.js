@@ -8,7 +8,6 @@ export const action = async ({ commit, state }, { x, y }) => {
     const targetItem = state.terrain[xLoc][yLoc]
     for (let i in characterTypes) {
       if (characterTypes[i].interact.isMonster && characterTypes[i].x === xLoc && characterTypes[i].y === yLoc) {
-        console.log('xxx', characterTypes)
         commit('fight', characterTypes[i])
       }
       if (characterTypes[i].interact.isQuestMonster && characterTypes[i].x === xLoc && characterTypes[i].y === yLoc) {
@@ -16,9 +15,6 @@ export const action = async ({ commit, state }, { x, y }) => {
           commit('getStartTalk', state.characters[characterTypes[i].name].startingTalk(state, characterTypes[i]))
         } else {
           commit('getStartTalkGnome', state.characters[characterTypes[i].name].startingTalk(state, character))
-          // if (characterTypes[i].dialog.start === 3) {
-          //   commit('getTreasure')
-          // }
         }
         // ////////
       }
@@ -94,4 +90,7 @@ export const itemManager = async ({ commit, state }, { answer, itemFrom, itemTo,
 }
 export const newGame = ({ commit, state }) => {
   commit('newGame', { type: state })
+}
+export const openPopupMainMenu = ({ commit, state }, message) => {
+  commit('openPopupMainMenu', message)
 }

@@ -1,11 +1,4 @@
-import {
-  mapItemCreator,
-  maps,
-  charactersAtMap,
-  charsRetranslaton,
-  itemRetranslaton,
-  characterCreator
-} from '../maps/localMap'
+import { mapItemCreator, maps, charactersAtMap, charsRetranslaton, itemRetranslaton, characterCreator } from '../maps/localMap'
 export const move = (state, { type, xy }) => {
   type.x = xy.x
   type.y = xy.y
@@ -119,4 +112,9 @@ export const ter1 = state => {
 export const ter2 = state => {
   state.terrain = itemRetranslaton(maps.location03, mapItemCreator)
   state.characters = charsRetranslaton(charactersAtMap.location03chars, characterCreator)
+}
+export const openPopupMainMenu = (state, message) => {
+  state.dialogMessage = Object.assign({}, message)
+  console.log('message', message)
+  console.log('state.dialogMessage', state.dialogMessage)
 }
