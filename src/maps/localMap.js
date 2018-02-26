@@ -268,7 +268,7 @@ export const charsRetranslaton = (arr, callback) => {
   let characters = {}
   arr.forEach((row, x) =>
     row.forEach((val, y) => {
-      if (val.length > 1) {
+      if (Array.isArray(val)) {
         if (val[0] === 'H') characters.hero = callback[val[0]]({ x: x, y: y })
         else if (val[0] === 'c') characters.catQuest = callback[val[0]]({ x: x, y: y })
         else if (val[0] === 'g') characters.gnomeQuest = callback[val[0]]({ x: x, y: y })
@@ -294,9 +294,7 @@ export const charsRetranslaton = (arr, callback) => {
         else if (val === 'c') characters.catQuest = callback[val]({ x: x, y: y })
         else if (val === 'g') characters.gnomeQuest = callback[val]({ x: x, y: y })
         else if (val === 'T') characters.treasure = callback[val]({ x: x, y: y })
-        else if (val !== ' ') {
-          characters[val + x + y] = callback[val]({ x: x, y: y })
-        }
+        else if (val !== ' ') characters[val + x + y] = callback[val]({ x: x, y: y })
       }
     })
   )
