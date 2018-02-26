@@ -119,3 +119,10 @@ export const openPopupMainMenu = (state, message) => {
 export const startingGame = state => {
   state.startGame = true
 }
+export const getWinGame = state => {
+  state.winGame = true
+}
+export const endingGame = state => {
+  state.winGame = false
+  state.startGame = false
+}

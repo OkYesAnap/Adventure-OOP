@@ -24,6 +24,11 @@ export const action = async ({ commit, state }, { x, y }) => {
       commit('move', { type: character, xy: { x: xLoc, y: yLoc } })
     }
   }
+  // -- getWinGame --
+  if (characterTypes.hero.x === characterTypes.treasure.x && characterTypes.hero.y === characterTypes.treasure.y) {
+    // console.log('characterTypes', characterTypes)
+    commit('getWinGame')
+  }
 }
 // chose Quest methods
 
@@ -96,4 +101,7 @@ export const openPopupMainMenu = ({ commit, state }, message) => {
 }
 export const startingGame = ({ commit, state }) => {
   commit('startingGame')
+}
+export const endingGame = ({ commit, state }) => {
+  commit('endingGame')
 }
