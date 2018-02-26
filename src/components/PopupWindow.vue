@@ -27,8 +27,6 @@ export default {
   },
   methods: {
     checkAnswers(item, dialog) {
-      // console.log('thisclick', this)
-      // console.log('dialog', dialog)
       this.$store.dispatch('checkingAnswer', { item, dialog })
     }
   }

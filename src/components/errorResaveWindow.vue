@@ -1,7 +1,6 @@
 <template>
   <div class="PopupNewGame">
     <div>{{ msg }}</div>
-      <!--<h1>{{alertsms}}</h1>-->
     <div class="aligner-space-around bottom-btn">
       <button class="button block-mobile" @click="getYesAnsver">yes</button>
       <button class="button button-primary block-mobile" @click="getNoAnsver">No</button>
@@ -21,12 +20,10 @@ export default {
   data: function() {
     return {}
   },
-  // props: ['msg', 'alertsms'],
   methods: {
     getYesAnsver() {
       this.$emit('acceptresave')
       this.$emit('sendNo', false)
-      // console.log(this.acceptresave())
     },
     getNoAnsver(event) {
       this.$emit('sendNo', false)

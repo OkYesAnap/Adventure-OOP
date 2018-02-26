@@ -12,11 +12,12 @@ export const action = async ({ commit, state }, { x, y }) => {
       }
       if (characterTypes[i].interact.isQuestMonster && characterTypes[i].x === xLoc && characterTypes[i].y === yLoc) {
         if (characterTypes[i].name !== 'gnomeQuest') {
+          // -- Quest started --
           commit('getStartTalk', state.characters[characterTypes[i].name].startingTalk(state, characterTypes[i]))
         } else {
           commit('getStartTalkGnome', state.characters[characterTypes[i].name].startingTalk(state, character))
         }
-        // ////////
+        // -- Quest started --
       }
     }
     if (!targetItem.interact.cantWalk && character.interact.walker) {
@@ -32,7 +33,6 @@ export const checkingAnswer = async ({ commit, state }, { item, dialog }) => {
       commit('listeningAnsver', state.characters[dialog.class].answeringOnEnigma(state, item, dialog))
       break
     case 'gnomeQuest':
-      // commit('сheckingbasket', state.hero[dialog.class].сheckingbasket(state, { item, dialog }))
       break
   }
 }
@@ -93,4 +93,7 @@ export const newGame = ({ commit, state }) => {
 }
 export const openPopupMainMenu = ({ commit, state }, message) => {
   commit('openPopupMainMenu', message)
+}
+export const startingGame = ({ commit, state }) => {
+  commit('startingGame')
 }

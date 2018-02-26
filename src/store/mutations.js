@@ -70,7 +70,7 @@ export const finishFight = state => {
   state.currentNPC.status = -1
 }
 
-// ////
+//       -- Quest --
 export const stopTalk = state => {
   state.modalWindow.opening = false
 }
@@ -98,7 +98,7 @@ export const listeningAnsver = (state, { whospeaks, start, info }) => {
     state.modalWindow.opening = false
   }
 }
-
+//      / -- Quest --
 export const newGame = (state, { type }) => {
   state.characters = charsRetranslaton(charactersAtMap.location01chars, characterCreator)
   state.terrain = itemRetranslaton(maps.location01, mapItemCreator)
@@ -114,6 +114,7 @@ export const ter2 = state => {
 }
 export const openPopupMainMenu = (state, message) => {
   state.dialogMessage = Object.assign({}, message)
-  console.log('message', message)
-  console.log('state.dialogMessage', state.dialogMessage)
+}
+export const startingGame = state => {
+  state.startGame = true
 }

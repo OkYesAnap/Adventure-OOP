@@ -15,10 +15,5 @@
 <script>
 export default {
   name: 'DevelopersScreen'
-  // computed: {
-  //   gameWinned: function() {
-  //     return this.$store.state.gameWinned
-  //   }
-  // }
 }
 </script>

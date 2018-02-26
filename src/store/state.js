@@ -5,6 +5,7 @@ export default function() {
     characters: characters,
     currentNPC: currentNPC,
     dialogMessage: { show: false },
+    startGame: false,
     modalWindow: {
       opening: false,
       info: ''

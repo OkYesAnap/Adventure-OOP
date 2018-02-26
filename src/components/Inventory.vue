@@ -42,7 +42,6 @@ export default {
           pick: this.inventories[put]
         })
       }
-      console.log('manageItem', this)
       this.$emit('manage', { x: this.focus.x, y: this.focus.y, z: this.focus.z, inventories: this.inventories })
       this.focus = { x: null, y: null, z: null }
     }

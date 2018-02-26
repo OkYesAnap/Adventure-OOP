@@ -42,17 +42,12 @@ export default {
   },
   methods: {
     load() {
-      console.log(JSON.parse(JSON.parse(localStorage.saveKey)[0].state).terrain)
       this.$store.state.terrain = JSON.parse(JSON.parse(localStorage.saveKey)[0].state).terrain
     },
     showInv() {
       this.showInventory = !this.showInventory
     },
     itemManagerCollector() {
-      // for (let speakCharacter in this.$store.state.characters) {
-      //   if (this.$store.state.characters[speakCharacter].dialog) {
-      //   }
-      // }
       if (this.manage === null) {
         let active = {}
         const ch = this.$store.state.characters

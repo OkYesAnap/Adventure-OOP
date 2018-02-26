@@ -4,10 +4,10 @@
    <div @click="openPopup"> 
       <div  class="button button-huge block-mobile" >New Game</div>
    </div>
-    <div>
+    <div v-show="this.$store.state.startGame">
       <router-link to="/game" class="button button-huge block-mobile button-red">Resume</router-link>
    </div>
-   <div>
+   <div v-show="this.$store.state.startGame">
       <router-link to="/save" class="button button-huge block-mobile">Save Game</router-link>
    </div>
    <div>
@@ -38,11 +38,13 @@ export default {
   name: 'MainMenu',
   methods: {
     openPopup() {
-      this.$store.dispatch('openPopupMainMenu', message)
+      if (this.$store.state.startGame) {
+        this.$store.dispatch('openPopupMainMenu', message)
+      } else {
+        this.$router.push({ name: 'GameScreen' })
+        this.$store.dispatch('startingGame')
+      }
     },
-    // newGame() {
-    //   return this.$store.dispatch('newGame')
-    // },
     answer(btns) {
       if (btns === 'yes') {
         this.$router.push({ name: 'GameScreen' })
