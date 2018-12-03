@@ -144,7 +144,7 @@ export const characterCreator = {
   TR: coords => new CharWithInventory(coords, 'TR', 'Trent', TRENT, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
   UN: coords => new CharWithInventory(coords, 'UN', 'Unicorn', UNICORN, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
   WP: coords => new CharWithInventory(coords, 'WP', 'WHITE PAWN', wpawn, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
-  BP: coords => new CharWithInventory(coords, 'WP', 'BLACK PAWN', bpawn, { walker: true, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
+  BP: coords => new CharWithInventory(coords, 'WP', 'BLACK PAWN', bpawn, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
   WR: coords => new CharWithInventory(coords, 'WR', 'WHITE ROOK', wrook, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
   BR: coords => new CharWithInventory(coords, 'BR', 'BLACK ROOK', brook, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
   WH: coords => new CharWithInventory(coords, 'WH', 'WHITE HOSE', whose, { walker: false, isMonster: false }, { invHeight: 5, invWidth: 5, maxVolume: 100 }, null, 10),
@@ -163,7 +163,7 @@ export const characterCreator = {
       'Freddy',
       FREDDI,
       { walker: false, isMonster: true },
-      { invHeight: 10, invWidth: 5, maxVolume: 50 },
+      { invHeight: 10, invWidth: 5, maxVolume: 300 },
       {
         0: { message: 'Do you want to fight?', links: [0, 1] },
         1: { message: 'Now you are fighting', links: [2] },
@@ -181,7 +181,7 @@ export const characterCreator = {
       'gnomeQuest',
       GNOMEQUEST,
       { walker: false, isQuestMonster: true },
-      { invHeight: 10, invWidth: 5, maxVolume: 50 },
+      { invHeight: 2, invWidth: 2, maxVolume: 5 },
       {
         0: {
           msg: 'Hello my name is Gnome. A you ready play with me?',

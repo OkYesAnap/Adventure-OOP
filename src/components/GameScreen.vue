@@ -14,7 +14,6 @@
       <div class="menu-bord " v:onkeyup.esc='backTomainMenu'>
         <router-link to="/" class="button button-huge block-mobile">back to main menu</router-link>
       </div>
-    <div @click="load">load</div>
       <p class="button button-huge block-mobile" @click="showInv">Inventory</p>
       <div class="text-huge text-white">{{ volume.cur }} OF {{ volume.max }}</div>
       <Inventory v-show="showInventory" @vol="volume = $event" @manage="manage = $event"/>
@@ -42,9 +41,6 @@ export default {
     }
   },
   methods: {
-    load() {
-      this.$store.state.terrain = JSON.parse(JSON.parse(localStorage.saveKey)[0].state).terrain
-    },
     showInv() {
       this.showInventory = !this.showInventory
     },
